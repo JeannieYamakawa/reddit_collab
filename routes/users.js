@@ -9,7 +9,6 @@ router.get('/users', function(req, res) {
   knex('users')
     .then((users) => {
       res.json(users);
-
     });
 });
 

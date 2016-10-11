@@ -11,7 +11,7 @@ const knex = require('./knex');
 app.disable('x-powered-by');
 
 const bodyParser = require('body-parser');
-const session = require('express-session');
+const session = require('cookie-session');
 const bcrypt = require('bcrypt-as-promised');
 const methodOverride = require('method-override');
 
