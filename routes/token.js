@@ -1,3 +1,5 @@
+/*jshint esversion:6*/
+
 'use strict';
 
 
@@ -9,41 +11,32 @@ const methodOverride = require('method-override');
 
 
 //Handles login and authentication
-router.post('/token', (req, res, next) => {
-    knex('users').where('email', req.body.email).first().then((user) => {
-            if (!user) {
-                //If there's no user
-                res.sendStatus(401);
+router.post('/login', (req, res, next) => {
+    knex('users')
+    .where('email', req.body.credential)
+    .orWhere('username', req.body.credential)
+    .first()
+    .then((user) => {
+        if(!user) {
+            return res.redirect('/login');
+        }
+        bcrypt.compare(req.body.credential, user.password)
+        .then((result) => {
+            if(result) {
+                req.session('loggedIn', true);
+                return res.redirect('/posts');
             }
-            //check password
-            return bcrypt.compare(req.body.password, user.hashpw);
-
-        })
-        .then(() => {
-          //grab users again...because async
-            knex('users').where('email', req.body.email).first().then((user) => {
-
-                req.session.user = user;
-                console.log(req.session);
-                res.cookie('loggedIn', true);
-                //render to whatever view you'd like with user as a variable
-                res.render('index', {
-                  user: req.session.user
-                });
-            })
-        })
-        //if bad password
-        .catch(bcrypt.MISMATCH_ERROR, () => {
-            res.sendStatus(401);
-        })
+            res.redirect('/login');
+        });
+    });
 });
 
 //handles logout users
-router.delete('/token', (req, res) => {
+router.get('/logout', (req, res) => {
     req.session = null;
     res.clearCookie('loggedIn');
     //redirect to the login page
-    res.redirect('/login.html');
+    res.redirect('/login');
 });
 
 module.exports = router;
