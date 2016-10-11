@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../knex');
 const bcrypt = require('bcrypt-as-promised');
-const reddit_app = require('../modules/reddit_app');
+const users_app = require('../modules/users_app');
 
 router.get('/users', function(req, res) {
   knex('users')
@@ -16,7 +16,7 @@ router.get('/users', function(req, res) {
 
 
 router.get('/', (req, res, next) => {
-  reddit_app.users.get.all()
+  users_app.users.get.all()
     .then((users) => {
       res.render('../pages/users', users);
       next();
@@ -24,7 +24,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/:id', (req, res, next) => {
-  reddit_app.users.get.byID(req.params.id)
+  users_app.users.get.byID(req.params.id)
     .then((user) => {
       res.render('../pages/users', users);
       next();
@@ -40,7 +40,7 @@ router.post('/', (req, res, next) => {
   bcrypt.hash(req.body.password, 10)
     .then((hash) => {
       newUser.password = hash;
-      reddit_app.users.set.new(newUser)
+      users_app.users.set.new(newUser)
         .then((row) => {
           res.locals.currentUser = row[0];
           res.locals.loggedIn = true;

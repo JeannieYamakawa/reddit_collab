@@ -1,5 +1,5 @@
-var app = {
-  users: {
+var reddit_users = {
+  users_app: {
     get: {
       all: function() {
         return knex('users')
@@ -30,4 +30,4 @@ var app = {
   }
 };
 
-moodule.exports = app;
+moodule.exports = users_app;
