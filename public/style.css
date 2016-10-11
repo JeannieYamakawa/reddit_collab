@@ -1,38 +1,29 @@
-body {
-  background-color: gray;
+* {
+    margin: 0;
 }
 
-/*FORM*/
+body {
+    width: 95%;
+    margin: auto;
+    font-family: 'Monaco', monospace;
+}
 
-.form-container {
-    position: relative;
+.loginSignup a {
+    margin-top: 1em;
+    padding: 1em;
+    border: 1px solid #000;
+    cursor: pointer;
+    display: inline-flex;
+    float: right;
+    text-decoration: none;
+    color: black;
+    font-size: 1.15em;
+    width: 4em;
+    justify-content: center;
     align-items: center;
 }
 
-.form-container>.wrapper {
-    text-align: center;
-}
-
-/*no ugly boxes*/
-input[type='text'], input[type='password'] {
-    text-align: center;
-    background-color: transparent;
-    border: 0px;
-    outline: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    width: auto;
-    color: white;
-    cursor: text;
-}
-
-.field {
-  position: relative;
-
-}
-
-/*style submit button*/
-input[type="submit"] {
-
+.loginSignup a:hover {
+    color: #FF4500;
+    border: 1px solid #FF4500;
 }
