@@ -9,6 +9,7 @@ const users_app = require('../modules/users_app');
 
 router.get('/:user_id/posts', (req,res)=>{
   users_app.users.posts.all(req.params.user_id);
+
 });
 
 router.get('/:id', (req, res, next) => {
