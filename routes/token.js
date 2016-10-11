@@ -11,6 +11,11 @@ const methodOverride = require('method-override');
 
 
 //Handles login and authentication
+router.get('/login', (req, res, next) => {
+        res.render('pages/login');
+    });
+
+
 router.post('/login', (req, res, next) => {
     knex('users')
     .where('email', req.body.credential)
