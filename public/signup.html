@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- jquery -->
+     <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+     <!-- semantic ui js -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.js" charset="utf-8"></script>
+     <!-- semantic ui css -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.css">
+     <!-- my js -->
+     <script src="/app.js" charset="utf-8"></script>
+     <!-- my css -->
+     <link rel="stylesheet" href="/style.css">
+
+    <meta charset="utf-8">
+    <title>Sign Up</title>
+  </head>
+  <body>
+    <main>
+        <h1 class="page-title">Sign Up</h1>
+
+<!-- Customize sign up form -->
+        <div class="form-container" id='signup-form'>
+            <div class="wrapper">
+                <form class="signup-form" action="/users" method="post">
+                  <div class="field">
+                    <input type="text" placeholder="First Name" name='fname'>
+                  </div>
+                  <div class="field">
+                    <input type="text" placeholder="Last Name" name='lname'>
+                  </div>
+                  <div class="field">
+                    <input type="text" placeholder="Email" name='email'>
+                  </div>
+                  <div class="field">
+                    <input type="password" placeholder="Password" name='password'>
+                  </div>
+                  <div class="field">
+                    <input type="password" placeholder="Confirm Password">
+                  </div>
+
+                  <input type="submit" value="Join Now"></button>
+
+
+                </form>
+
+            </div>
+
+        </div>
+        </div>
+    </main>
+  </body>
+</html>
