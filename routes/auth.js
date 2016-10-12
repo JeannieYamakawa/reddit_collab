@@ -12,36 +12,36 @@ const methodOverride = require('method-override');
 
 //GET login page
 router.get('/login', (req, res, next) => {
-        res.render('pages/login', {
-            loginMessage : "",
-        });
+    res.render('login', {
+        loginMessage: "",
     });
+});
 
 //authenticate and begin tracking session
 router.post('/login', (req, res, next) => {
     knex('users')
-    .where('email', req.body.credential)
-    .orWhere('username', req.body.credential)
-    .first()
-    .then((user) => {
+        .where('email', req.body.credential)
+        .orWhere('username', req.body.credential)
+        .first()
+        .then((user) => {
 
-        if(!user) {
-            return res.render('pages/login', {
-                loginMessage : "invalid login info",
-            });
-        }
-
-        bcrypt.compare(req.body.credential, user.password)
-        .then((result) => {
-            if(result) {
-                req.session('loggedIn', true);
-                return res.redirect('/posts');
+            if (!user) {
+                return res.render('pages/login', {
+                    loginMessage: "invalid login info",
+                });
             }
-            res.render('/login', {
-                loginMessage : "invalid login info",
-            });
+
+            bcrypt.compare(req.body.credential, user.password)
+                .then((result) => {
+                    if (result) {
+                        req.session('loggedIn', true);
+                        return res.redirect('/posts');
+                    }
+                    res.render('/login', {
+                        loginMessage: "invalid login info",
+                    });
+                });
         });
-    });
 });
 
 //logout
