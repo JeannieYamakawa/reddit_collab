@@ -1,3 +1,5 @@
+const knex = require('../knex');
+
 var users_app = {
   users: {
     get: {
