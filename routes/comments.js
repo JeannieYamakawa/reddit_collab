@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
-const router = express.Router();
+const router = express.Router({
+  mergeParams: true
+});
 const knex = require('../knex');
-// const bcrypt = require('bcrypt-as-promised');

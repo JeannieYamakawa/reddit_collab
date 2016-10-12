@@ -11,6 +11,14 @@ router.get('/:user_id/posts', (req,res)=>{
   users_app.users.posts.all(req.params.user_id);
 
 });
+router.get('/signup', (req,res)=>{
+  res.render('signup');
+});
+
+router.get('/login', (req,res)=>{
+  res.render('login');
+
+});
 
 router.get('/:id', (req, res, next) => {
   users_app.users.get.byID(req.params.id)
