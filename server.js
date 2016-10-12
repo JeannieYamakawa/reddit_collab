@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
 // app.use(bodyParser.json());
 app.use(cookieSession({
   name: 'session',
-  keys: ['loggedIn', 'username', 'admin'],
+  keys : ['key1', 'key2'],
 }));
 app.use(methodOverride('_method'));
 

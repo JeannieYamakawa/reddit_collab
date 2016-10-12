@@ -37,8 +37,10 @@ router.post('/login', (req, res, next) => {
             if(result) {
                 req.session({
                     'loggedIn':true,
+                    id : user.id,
                     username : user.username,
-                    admin:user.admin
+                    email : user.email,
+                    admin:user.admin,
                 });
                 return res.redirect('/posts');
             }
