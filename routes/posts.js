@@ -7,7 +7,6 @@ const bcrypt = require('bcrypt-as-promised');
 
 router.get('/', (req, res, next) => {
   knex('posts').then((posts) =>{
-
     res.render('posts', {
       posts:posts
     })

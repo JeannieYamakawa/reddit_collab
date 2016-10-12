@@ -27,6 +27,17 @@ describe('***SUITE HEADER***', () => {
 describe('POSTS', function () {
  it('should show all of the posts', function (done) {
     request(app).get('/posts')
-              .expect(200, done);
+              .expect(200)
+              .end((err, res) => {
+                if(err){
+                  done(err)
+                }
+                knex('posts').then((posts)=>{
+                  expect(res.text).to.include(posts[0].title)
+                  expect(res.text).to.include(posts[1].title)
+                  expect(res.text).to.include(posts[2].title)
+                  done()
+                })
+              })
  })
 })
