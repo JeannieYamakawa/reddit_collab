@@ -31,7 +31,7 @@ router.get( '/:id', ( req, res, next ) => {
     } )
 } )
 
-router.get( '/:id/edit', ( req, res, next ) => {
+router.get( '/:id/edit', authorizedUser, ( req, res, next ) => {
     let postID = req.params.id;
     knex( 'posts' ).where( 'id', postID ).first().then( ( post ) => {
         res.render( 'edit-post', {
