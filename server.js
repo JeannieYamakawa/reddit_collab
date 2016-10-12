@@ -55,11 +55,9 @@ app.use('/', (req, res, next) => {
 const port = process.env.PORT || 3000;
 // Server Listener
 app.listen(port, function() {
-<<<<<<< 7f923bb3810004063e1ca8ae629d033baaa6537b
-  console.log(process.env.NODE_ENV, 'listening on port: ' + port);
-=======
-    console.log(process.env.NODE_ENV ,'listening on port: ' + port);
->>>>>>> add admin status to session
+    console.log(process.env.NODE_ENV, 'listening on port: ' +
+    port);
+
 });
 
 module.exports = app;

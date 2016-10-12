@@ -17,7 +17,6 @@ router.get('/login', (req, res, next) => {
             loginMessage : "",
         });
     });
-});
 
 //authenticate and begin tracking session
 router.post('/login', (req, res, next) => {
@@ -52,6 +51,7 @@ router.post('/login', (req, res, next) => {
                     });
                 });
         });
+});
 });
 
 //logout
