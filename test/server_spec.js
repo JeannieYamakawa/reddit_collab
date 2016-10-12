@@ -11,16 +11,12 @@ const bcrypt = require('bcrypt-as-promised');
 
 describe('***THE REDDIT CLONE***', () => {
 
-<<<<<<< 7f923bb3810004063e1ca8ae629d033baaa6537b
-  describe('GET /logout', () => {
-=======
     //delete all data added during previous round of testing
     beforeEach( ()=> {
         return knex('users').where('id', '>', 3).del();
     });
 
     describe('GET /logout', () => {
->>>>>>> add admin status to session
 
     it('should redirect to the base URL', (done) => {
       request(app)
@@ -36,11 +32,7 @@ describe('***THE REDDIT CLONE***', () => {
               done();
             });
     });
-<<<<<<< 7f923bb3810004063e1ca8ae629d033baaa6537b
   });
-});
-=======
->>>>>>> add admin status to session
 
 xdescribe('POSTS', function () {
  it('should show all of the posts', function (done) {
@@ -55,8 +47,7 @@ xdescribe('POSTS', function () {
                   expect(res.text).to.include(posts[1].title);
                   expect(res.text).to.include(posts[2].title);
                   done();
-<<<<<<< 7f923bb3810004063e1ca8ae629d033baaa6537b
-                });
+                              });
               });
   });
   xit('should show a single post with all of the comments', function (done) {
@@ -85,11 +76,8 @@ xdescribe('POSTS', function () {
               });
 
   });
-=======
               });
-          });
- });
-});
+
 
 describe('POST /admin/:user_id', () => {
 
@@ -111,5 +99,4 @@ describe('POST /admin/:user_id', () => {
         });
     });
 });
->>>>>>> add admin status to session
 });
