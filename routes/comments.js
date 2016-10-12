@@ -27,6 +27,9 @@ const knex = require('../knex');
 //   });
 // });
 
+router.get('/:id', function(req, res) {
+  res.redirect('/posts');
+});
 
 router.get('/:id/edit', function(req, res) {
   knex('comments').where({
