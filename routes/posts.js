@@ -50,6 +50,17 @@ router.post('/', authorizedUser, (req, res, next) => {
   })
 })
 
+router.post('/:id', authorizedUser, (req, res, next)=>{
+  let postID = req.params.id;
+  knex('comments').insert({
+    content: req.body.content,
+    post_id: postID,
+    user_id: req.session.user.id
+  }).then((comment)=>{
+    res.redirect('/posts/' + postID);
+  })
+})
+
 
 
 module.exports = router;
