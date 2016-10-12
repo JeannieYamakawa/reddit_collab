@@ -12,23 +12,33 @@ const methodOverride = require('method-override');
 
 //GET login page
 router.get('/login', (req, res, next) => {
-    res.render('login', {
-        loginMessage: "",
+    console.log(req.session);
+        res.render('pages/login', {
+            loginMessage : "",
+        });
     });
 });
 
 //authenticate and begin tracking session
 router.post('/login', (req, res, next) => {
     knex('users')
-        .where('email', req.body.credential)
-        .orWhere('username', req.body.credential)
-        .first()
-        .then((user) => {
+    .where('email', req.body.credential)
+    .orWhere('username', req.body.credential)
+    .first()
+    .then((user) => {
 
-            if (!user) {
-                return res.render('pages/login', {
-                    loginMessage: "invalid login info",
-                });
+        if(!user) {
+            return res.render('pages/login', {
+                loginMessage : "invalid login info",
+            });
+        }
+
+        bcrypt.compare(req.body.credential, user.password)
+        .then((result) => {
+            if(result) {
+                req.session({'loggedIn':true,
+                admin:user.admin});
+                return res.redirect('/posts');
             }
 
             bcrypt.compare(req.body.credential, user.password)
