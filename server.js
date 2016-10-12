@@ -49,13 +49,13 @@ app.use('/users', users);
 app.use('/posts', posts);
 app.use('/comments', comments);
 app.use('/', (req, res, next) => {
-    res.render('./pages/index');
+    res.render('pages/index');
 });
 
 const port = process.env.PORT || 3000;
 // Server Listener
 app.listen(port, function() {
-    console.log(process.env.NODE_ENV, 'listening on port: ' + port);
+    console.log(process.env.NODE_ENV || 'development', 'listening on port: ' + port);
 });
 
 module.exports = app;

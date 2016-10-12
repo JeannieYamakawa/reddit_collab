@@ -99,4 +99,4 @@ describe('POST /admin/:user_id', () => {
         });
     });
 });
-});
+    });

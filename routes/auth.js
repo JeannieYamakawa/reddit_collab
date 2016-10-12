@@ -7,12 +7,17 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../knex');
 const bcrypt = require('bcrypt-as-promised');
-const methodOverride = require('method-override');
+const users_app = require('../modules/users_app');
 
+
+router.get('/signup', (req,res)=>{
+    res.render('pages/signup', {
+      signupMessage : '',
+  });
+});
 
 //GET login page
 router.get('/login', (req, res, next) => {
-    console.log(req.session);
         res.render('pages/login', {
             loginMessage : "",
         });

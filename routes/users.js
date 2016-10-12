@@ -11,9 +11,9 @@ router.get('/:user_id/posts', (req,res)=>{
   users_app.users.posts.all(req.params.user_id);
 
 });
-router.get('/signup', (req,res)=>{
-  res.render('signup');
-});
+// router.get('/signup', (req,res)=>{
+//   res.render('signup');
+// });
 
 router.get('/login', (req,res)=>{
   res.render('login');
@@ -39,7 +39,9 @@ router.get('/', (req, res, next) => {
 });
 
 
-router.post('/login', (req, res, next) => {
+//commented out to move to auth route
+
+router.post('/signup', (req, res, next) => {
   let newUser = {
     username: req.body.username,
     email: req.body.email
