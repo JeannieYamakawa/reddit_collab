@@ -13,7 +13,7 @@ body {
 
 /*Landing Page*/
 
-.reddit_welcome {
+.redditWelcome {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -59,33 +59,42 @@ body {
 
 input {
     display: block;
-    margin-bottom: 1em !important;
+    margin-bottom: 1em;
     margin: auto;
 }
 
 
 /*All Posts Page*/
 
-.container {
+.userWelcome {
+    display: flex;
+}
+
+.userWelcome h2 {
+    margin: 0;
+    margin-top: 0.32em;
+    font-size: 2.5em;
+    margin-right: 0.5em;
+}
+
+.userWelcome h3 {
+    margin: 0;
+    margin-top: 0.30em;
+    font-size: 2.5em;
+}
+
+.postBox {
     border: 1px solid #000;
     padding: 0.5em;
 }
 
-.title {
+.postTitle {
     font-size: 1.75em;
     margin-bottom: 0.5em;
 }
 
-.body {
+.postBody {
     font-size: 1.25em;
     margin-bottom: 0.5em;
     font-weight: lighter;
-}
-
-5em;
-font-weight: lighter;
-
-}
-;
-
 }

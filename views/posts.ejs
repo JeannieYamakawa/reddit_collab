@@ -18,12 +18,19 @@
     </head>
 
     <body>
+        <div class="userWelcome">
+            <h2> Welcome </h2>
+            <% posts.forEach(function (user){ %>
+                <h3><%=user.username %></h3>
+                <% }) %>
+        </div>
 
+        <p></p>
 
         <% posts.forEach(function (post){ %>
-            <div class="container">
-                <h4 class="title"><%=post.title %></h4>
-                <p class="body">
+            <div class="postBox">
+                <h4 class="postTitle"><%=post.title %></h4>
+                <p class="postBody">
                     <%=post.body %>
                 </p>
                 </p>
