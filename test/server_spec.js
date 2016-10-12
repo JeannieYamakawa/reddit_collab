@@ -43,4 +43,20 @@ describe('POSTS', function () {
                 })
               })
  })
+ it('should show a single post with all of the comments', function (done) {
+    request(app).get('/posts/1')
+              .expect(200)
+              .end((err, res) => {
+                if(err){
+                  done(err)
+                }
+                knex('posts').where('posts.id', 1).innerJoin('comments', 'posts.id', 'comments.post_id').then((post)=>{
+                  expect(res.text).to.contain(post[0].title)
+                  expect(res.text).to.contain(post[0].body)
+                  expect(res.text).to.contain(post[0].content)
+                  done();
+                })
+              })
+ })
+
 })
