@@ -30,4 +30,4 @@ var reddit_users = {
   }
 };
 
-moodule.exports = users_app;
+module.exports = reddit_users.users_app;

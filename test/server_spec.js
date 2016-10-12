@@ -8,18 +8,21 @@ const app = require('../server');
 const knex = require('../knex');
 
 
-describe('***SUITE HEADER***', () => {
+describe('***THE REDDIT CLONE***', () => {
 
-    xdescribe('suite subheader', () => {
+    describe('GET /logout', () => {
 
-        it('User Story 1', (done) => {
-            done();
-        })
-
-        it('User Story 2', (done) => {
-            done();
-        })
-
+        it('should redirect to the base URL', (done) => {
+            request(app)
+            .get('/logout')
+            .expect(302)
+            .end((err, res) => {
+                if(err) {
+                    console.error(err);
+                }
+                expect(res.header['locaion']).to.equal('/');
+                done();
+            });
+        });
     });
-
 });
