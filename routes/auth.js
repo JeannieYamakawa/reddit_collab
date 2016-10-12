@@ -12,7 +12,9 @@ const methodOverride = require('method-override');
 
 //Handles login and authentication
 router.get('/login', (req, res, next) => {
-        res.render('pages/login');
+        res.render('pages/login', {
+            loginMessage : "",
+        });
     });
 
 
@@ -23,7 +25,9 @@ router.post('/login', (req, res, next) => {
     .first()
     .then((user) => {
         if(!user) {
-            return res.redirect('/login');
+            return res.render('pages/login', {
+                loginMessage : "invalid login info",
+            });
         }
         bcrypt.compare(req.body.credential, user.password)
         .then((result) => {
@@ -31,7 +35,9 @@ router.post('/login', (req, res, next) => {
                 req.session('loggedIn', true);
                 return res.redirect('/posts');
             }
-            res.redirect('/login');
+            res.render('/login', {
+                loginMessage : "invalid login info",
+            });
         });
     });
 });
@@ -39,9 +45,8 @@ router.post('/login', (req, res, next) => {
 //handles logout users
 router.get('/logout', (req, res) => {
     req.session = null;
-    res.clearCookie('loggedIn');
     //redirect to the login page
-    res.redirect('/login');
+    res.redirect('/');
 });
 
 module.exports = router;
