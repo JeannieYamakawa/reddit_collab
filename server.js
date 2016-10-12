@@ -21,8 +21,8 @@ app.use(bodyParser.urlencoded({
 }));
 // app.use(bodyParser.json());
 app.use(cookieSession({
-    name : 'session',
-    keys : ['loggedIn', 'username'],
+  name: 'session',
+  keys: ['loggedIn', 'username'],
 }));
 app.use(methodOverride('_method'));
 
@@ -39,24 +39,25 @@ const checkAuth = function(req, res, next) {
 const users = require('./routes/users');
 const auth = require('./routes/auth');
 const posts = require('./routes/posts');
+const comments = require('./routes/comments');
 
 // Assign Routes to Server
 app.use('/login', auth);
 app.use('/logout', auth);
-app.use('/users',users);
+app.use('/users', users);
 app.use('/posts', posts);
-app.use('/',(req,res,next)=>{
+app.use(comments);
+app.use('/', (req, res, next) => {
   res.render('./pages/index');
 });
 
 const port = process.env.PORT || 3000;
 // Server Listener
 app.listen(port, function() {
-  console.log(process.env.NODE_ENV ,'listening on port: ' + port);
+  console.log(process.env.NODE_ENV, 'listening on port: ' + port);
 });
 
 module.exports = app;
-
 
 
 
