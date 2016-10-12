@@ -21,8 +21,8 @@ router.get('/login', (req, res, next) => {
 //authenticate and begin tracking session
 router.post('/login', (req, res, next) => {
     knex('users')
-    .where('email', req.body.credential)
-    .orWhere('username', req.body.credential)
+    .where('email', req.body.username)
+    .orWhere('username', req.body.email)
     .first()
     .then((user) => {
 
@@ -32,7 +32,7 @@ router.post('/login', (req, res, next) => {
             });
         }
 
-        bcrypt.compare(req.body.credential, user.password)
+        bcrypt.compare(req.body.password, user.password)
         .then((result) => {
             if(result) {
                 req.session({
