@@ -31,8 +31,8 @@ app.use(methodOverride('_method'));
 //use as second argument whenever a user needs to be authenticated and logged in to view
 
 const checkAuth = function(req, res, next) {
-    if (!req.session.username) {
-        return res.sendStatus(401);
+    if (!req.session) {
+        return res.redirect('/');
     }
     next();
 };
