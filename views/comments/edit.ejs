@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Comment Edit Page</title>
+</head>
+<body>
+  <h2> My Comment Edit Page </h2>
+  <h4>Current Comment: </h4>
+  <p><%=comment.content %></p>
+  <form action= <%= "/comments/" + comment.id + "?_method=PATCH"%> method="POST">
+    <input type="text" name="content" value placeholder="Comment" required />
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
