@@ -58,5 +58,15 @@ describe('POSTS', function () {
                 })
               })
  })
+ it('should show a the edit single post page', function (done) {
+    request(app).get('/posts/1/edit')
+              .expect(200)
+              .end((err, res)=>{
+                if(err){
+                  done(err)
+                }
+                expect(res.text).to.contain('</form>')
+              })
 
+ })
 })
