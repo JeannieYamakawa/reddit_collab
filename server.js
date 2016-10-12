@@ -38,6 +38,7 @@ const checkAuth = function(req, res, next) {
 // Declare routes variables
 const users = require('./routes/users');
 const auth = require('./routes/auth');
+const posts = require('./routes/posts');
 
 // Assign Routes to Server
 app.use('/login', auth);

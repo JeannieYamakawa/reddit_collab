@@ -13,12 +13,14 @@ describe('***THE REDDIT CLONE***', () => {
         it('should redirect to the base URL', (done) => {
             request(app)
             .get('/logout')
-            .expect(302)
+            // .expect(200)
             .end((err, res) => {
                 if(err) {
-                    console.error(err);
+                    done(err);
                 }
-                expect(res.header['locaion']).to.equal('/');
+                // console.log(res.header);
+                // expect(res.header['location']).to.equal('/');
+                expect(res.text).to.include('<div class="loginSignup">');
                 done();
             });
         });
