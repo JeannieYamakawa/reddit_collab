@@ -5,7 +5,15 @@ const router = express.Router();
 const knex = require('../knex');
 const bcrypt = require('bcrypt-as-promised');
 
-<<<<<<< HEAD
+function authorizedUser(req, res, next) {
+  let loggedInUser = req.session.user;
+  if (loggedInUser) {
+    next();
+  } else {
+    res.send('restricted')
+  }
+}
+
 router.get('/', (req, res, next) => {
   knex('users').innerJoin('posts', 'users.id', 'posts.user_id').then((posts) => {
     res.render('posts', {
@@ -13,24 +21,6 @@ router.get('/', (req, res, next) => {
     })
   })
 })
-=======
-function authorizedUser(req, res, next) {
-  let loggedInUser = req.session.user;
-  if(loggedInUser){
-    next();
-  } else {
-    res.send('restricted')
-  }
-}
-
-router.get( '/', ( req, res, next ) => {
-    knex( 'users' ).innerJoin('posts', 'users.id', 'posts.user_id').then( ( posts ) => {
-        res.render( 'posts', {
-            posts: posts
-        } )
-    } )
-} )
->>>>>>> 719c73153751ee1974659c0178d8e04c015f3feb
 
 router.get('/:id', (req, res, next) => {
   let postID = req.params.id;
@@ -56,7 +46,7 @@ router.post('/', authorizedUser, (req, res, next) => {
     title: req.body.title,
     body: req.body.body,
     user_id: req.session.user.id
-  }).then((post)=>{
+  }).then((post) => {
     res.redirect('/posts');
   })
 })
