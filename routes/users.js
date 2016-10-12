@@ -24,17 +24,16 @@ router.get('/login', (req,res)=>{
 router.get('/:id', (req, res, next) => {
   users_app.users.get.byID(req.params.id)
     .then((users) => {
-      res.render('../pages/users', users);
-      next();
+      res.render('./user-posts', {posts:[]});
+
     });
-  res.send('hello');
 });
 
 router.get('/', (req, res, next) => {
+  console.log(req.locals);
   users_app.users.get.all()
     .then((users) => {
-      res.render('../page/login', users);
-      next();
+      res.render('./login', users);
     });
 });
 
@@ -56,7 +55,6 @@ router.post('/login', (req, res, next) => {
           req.session.loggedIn = true;
 
           res.redirect('/index');
-          next();
         });
     });
 });

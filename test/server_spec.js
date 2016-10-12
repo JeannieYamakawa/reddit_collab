@@ -11,19 +11,19 @@ const bcrypt = require('bcrypt-as-promised');
 
 describe('***THE REDDIT CLONE***', () => {
 
-<<<<<<< 7f923bb3810004063e1ca8ae629d033baaa6537b
+
   describe('GET /logout', () => {
-=======
+
     //delete all data added during previous round of testing
     beforeEach( ()=> {
-        return knex('users').where('id', '>', 3).del();
+      return knex('users').where('id', '>', 3).del();
     });
 
     describe('GET /logout', () => {
->>>>>>> add admin status to session
 
-    it('should redirect to the base URL', (done) => {
-      request(app)
+
+      xit('should redirect to the base URL', (done) => {
+        request(app)
             .get('/logout')
             // .expect(200)
             .end((err, res) => {
@@ -35,16 +35,15 @@ describe('***THE REDDIT CLONE***', () => {
               expect(res.text).to.include('<div class="loginSignup">');
               done();
             });
-    });
-<<<<<<< 7f923bb3810004063e1ca8ae629d033baaa6537b
-  });
-});
-=======
->>>>>>> add admin status to session
+      });
 
-xdescribe('POSTS', function () {
- it('should show all of the posts', function (done) {
-    request(app).get('/posts')
+    });
+  });
+
+
+  xdescribe('POSTS', function () {
+    it('should show all of the posts', function (done) {
+      request(app).get('/posts')
               .expect(200)
               .end((err, res) => {
                 if(err){
@@ -55,12 +54,12 @@ xdescribe('POSTS', function () {
                   expect(res.text).to.include(posts[1].title);
                   expect(res.text).to.include(posts[2].title);
                   done();
-<<<<<<< 7f923bb3810004063e1ca8ae629d033baaa6537b
+
                 });
               });
-  });
-  xit('should show a single post with all of the comments', function (done) {
-    request(app).get('/posts/1')
+    });
+    xit('should show a single post with all of the comments', function (done) {
+      request(app).get('/posts/1')
               .expect(200)
               .end((err, res) => {
                 if(err){
@@ -73,9 +72,9 @@ xdescribe('POSTS', function () {
                   done();
                 });
               });
-  });
-  xit('should show a the edit single post page', function (done) {
-    request(app).get('/posts/1/edit')
+    });
+    xit('should show a the edit single post page', function (done) {
+      request(app).get('/posts/1/edit')
               .expect(200)
               .end((err, res)=>{
                 if(err){
@@ -84,32 +83,28 @@ xdescribe('POSTS', function () {
                 expect(res.text).to.contain('</form>');
               });
 
+    });
+
   });
-=======
-              });
-          });
- });
 });
 
 describe('POST /admin/:user_id', () => {
 
-    it('should make a user an admin', (done) => {
-        request(app)
+  xit('should make a user an admin', (done) => {
+    request(app)
         .post('/admin/1')
         .expect(200)
         .end((err, res) => {
-            if(err) {
-                done(err);
-            }
-            knex('users').where({
-                id : 1
-            })
+          if(err) {
+            done(err);
+          }
+          knex('users').where({
+            id : 1
+          })
             .first().then((user) => {
-                expect(user.admin).to.equal(true);
-                done();
+              expect(user.admin).to.equal(true);
+              done();
             });
         });
-    });
-});
->>>>>>> add admin status to session
+  });
 });
