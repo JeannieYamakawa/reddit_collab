@@ -20,6 +20,7 @@ router.get('/login', (req,res)=>{
 
 });
 
+
 router.get('/:id', (req, res, next) => {
   users_app.users.get.byID(req.params.id)
     .then((users) => {
@@ -32,13 +33,13 @@ router.get('/:id', (req, res, next) => {
 router.get('/', (req, res, next) => {
   users_app.users.get.all()
     .then((users) => {
-      res.render('../views/login', users);
+      res.render('../page/login', users);
       next();
     });
 });
 
 
-router.post('/', (req, res, next) => {
+router.post('/login', (req, res, next) => {
   let newUser = {
     username: req.body.username,
     email: req.body.email
@@ -59,6 +60,8 @@ router.post('/', (req, res, next) => {
         });
     });
 });
+
+
 
 
 
