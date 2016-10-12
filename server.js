@@ -39,11 +39,13 @@ const checkAuth = function(req, res, next) {
 const users = require('./routes/users');
 const auth = require('./routes/auth');
 const posts = require('./routes/posts');
+const comments = require('./routes/comments');
 
 // Assign Routes to Server
 app.use('/auth', auth);
 app.use('/users', users);
 app.use('/posts', posts);
+app.use('/comments', comments);
 app.use('/', (req, res, next) => {
   res.render('./pages/index');
 });

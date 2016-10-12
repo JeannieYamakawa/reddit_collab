@@ -27,8 +27,8 @@ describe('***THE REDDIT CLONE***', () => {
   });
 });
 
-describe('POSTS', function () {
-  xit('should show all of the posts', function (done) {
+xdescribe('POSTS', function () {
+ it('should show all of the posts', function (done) {
     request(app).get('/posts')
               .expect(200)
               .end((err, res) => {
