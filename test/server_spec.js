@@ -23,3 +23,10 @@ describe('***SUITE HEADER***', () => {
     });
 
 });
+
+describe('POSTS', function () {
+ it('should show all of the posts', function (done) {
+    request(app).get('/posts')
+              .expect(200, done);
+ })
+})

@@ -44,13 +44,15 @@ const checkAuth = function(req, res, next) {
 // Declare routes variables
 const users = require('./routes/users');
 const tokens = require('./routes/token');
+const posts = require('./routes/posts')
 
 // Assign Routes to Server
 app.use(tokens);
+app.use('/users',users);
+app.use('/posts', posts);
 app.use('/',(req,res,next)=>{
   res.render('./pages/index');
 });
-app.use('/users',users);
 
 
 
