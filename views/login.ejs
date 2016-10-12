@@ -18,9 +18,17 @@
     </head>
 
     <body>
-        <% for (var i = 0; i < 3; i ++) { %>
-            <h1>Login</h1>
-            <% } %>
+        <div class=""></div>
+        <div class="displayBox">
+            <div class="fieldsBox">
+                <h2>Login Page</h2>
+                <form class="formEdit" action="/auth/login" method="POST">
+                    <input type="text" name="username" value placeholder="Username">
+                    <input type="password" name="password" value placeholder="Password">
+                    <button class="ui white button" type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
     </body>
 
 </html>

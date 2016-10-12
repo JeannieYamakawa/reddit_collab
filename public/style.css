@@ -10,7 +10,18 @@ body {
     background-color: #87cefa;
 }
 
-.loginSignup a {
+
+/*Landing Page*/
+
+.reddit_welcome {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+}
+
+.loginSignupButtons a {
     margin-top: 1em;
     padding: 1em;
     border: 1px solid #000;
@@ -25,10 +36,35 @@ body {
     align-items: center;
 }
 
-.loginSignup a:hover {
-    color: #FF4500;
-    border: 1px solid #FF4500;
+.loginSignupButtons a:hover {
+    color: #FA6900;
+    border: 1px solid #FA6900;
 }
+
+
+/*Login Page*/
+
+.displayBox {
+    display: flex;
+}
+
+.fieldsBox {
+    border: 1px solid #000;
+    margin: auto;
+    font-size: 2em;
+    padding: 0.5em;
+    text-align: center;
+    margin-top: 1em;
+}
+
+input {
+    display: block;
+    margin-bottom: 1em !important;
+    margin: auto;
+}
+
+
+/*All Posts Page*/
 
 .container {
     border: 1px solid #000;
@@ -44,4 +80,12 @@ body {
     font-size: 1.25em;
     margin-bottom: 0.5em;
     font-weight: lighter;
+}
+
+5em;
+font-weight: lighter;
+
+}
+;
+
 }
