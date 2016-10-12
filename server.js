@@ -42,18 +42,22 @@ const checkAuth = function(req, res, next) {
 };
 
 // Declare routes variables
-const users = require('./routes/users.js');
-const tokens = require('./routes/token.js');
+const users = require('./routes/users');
+const tokens = require('./routes/token');
 
 // Assign Routes to Server
-app.use(users);
 app.use(tokens);
+app.use('/',(req,res,next)=>{
+  res.render('./pages/index');
+});
+app.use('/users',users);
+
 
 
 const port = process.env.PORT || 3000;
 // Server Listener
 app.listen(port, function() {
-  console.log('listening on port: ' + port);
+  console.log(process.env.NODE_ENV ,'listening on port: ' + port);
 });
 
 module.exports = app;

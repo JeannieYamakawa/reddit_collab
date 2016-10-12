@@ -18,12 +18,13 @@ router.get('/:id', (req, res, next) => {
       res.render('../pages/users', users);
       next();
     });
+  res.send('hello');
 });
 
 router.get('/', (req, res, next) => {
   users_app.users.get.all()
     .then((users) => {
-      res.render('../pages/users', users);
+      res.render('../views/login', users);
       next();
     });
 });
