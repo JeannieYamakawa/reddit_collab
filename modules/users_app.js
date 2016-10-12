@@ -1,5 +1,7 @@
-var reddit_users = {
-  users_app: {
+const knex = require('../knex');
+
+var users_app = {
+  users: {
     get: {
       all: function() {
         return knex('users')
@@ -25,9 +27,21 @@ var reddit_users = {
           .OrWhere({
             username: user_login
           });
+      },
+      posts: {
+        byUserID: function(user_id) {
+          return knex('posts')
+            .select('*')
+            .where({
+              user_id: user_id
+            })
+            .orderBy('created_at', 'desc');
+
+        }
+
       }
     }
   }
 };
 
-module.exports = reddit_users.users_app;
+module.exports = users_app;

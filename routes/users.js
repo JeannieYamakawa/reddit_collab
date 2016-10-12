@@ -6,29 +6,29 @@ const knex = require('../knex');
 const bcrypt = require('bcrypt-as-promised');
 const users_app = require('../modules/users_app');
 
-router.get('/users', function(req, res) {
-  knex('users')
-    .then((users) => {
-      res.json(users);
-    });
-});
 
+router.get('/:user_id/posts', (req,res)=>{
+  users_app.users.posts.all(req.params.user_id);
 
-router.get('/', (req, res, next) => {
-  users_app.users.get.all()
-    .then((users) => {
-      res.render('../pages/users', users);
-      next();
-    });
 });
 
 router.get('/:id', (req, res, next) => {
   users_app.users.get.byID(req.params.id)
-    .then((user) => {
+    .then((users) => {
       res.render('../pages/users', users);
       next();
     });
+  res.send('hello');
 });
+
+router.get('/', (req, res, next) => {
+  users_app.users.get.all()
+    .then((users) => {
+      res.render('../views/login', users);
+      next();
+    });
+});
+
 
 router.post('/', (req, res, next) => {
   let newUser = {

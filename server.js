@@ -17,7 +17,7 @@ const ejs = require('ejs');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({
-    extended: false
+  extended: false
 }));
 // app.use(bodyParser.json());
 app.use(cookieSession({
@@ -27,26 +27,31 @@ app.use(cookieSession({
 app.use(methodOverride('_method'));
 
 //use as second argument whenever a user needs to be authenticated and logged in to view
+
 const checkAuth = function(req, res, next) {
   if (!req.session.user) {
     return res.sendStatus(401);
   }
   next();
-}
+};
 
 // Declare routes variables
-const users = require('./routes/users.js');
-const auth = require('./routes/auth.js');
+const users = require('./routes/users');
+const auth = require('./routes/auth');
 
 // Assign Routes to Server
-app.use(users);
-app.use(auth);
-
+app.use('/login', auth);
+app.use('/logout', auth);
+app.use('/users',users);
+app.use('/posts', posts);
+app.use('/',(req,res,next)=>{
+  res.render('./pages/index');
+});
 
 const port = process.env.PORT || 3000;
 // Server Listener
 app.listen(port, function() {
-    console.log('listening on port: ' + port);
+  console.log(process.env.NODE_ENV ,'listening on port: ' + port);
 });
 
 module.exports = app;

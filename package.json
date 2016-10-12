@@ -7,8 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha",
-    "start": "node server.js",
+    "test": "NODE_ENV=test mocha",
+    "start": "nodemon server.js",
     "knex": "knex",
     "heroku-postbuild": "knex migrate:latest",
     "nodemon": "nodemon server.js"
