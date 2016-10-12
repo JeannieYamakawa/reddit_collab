@@ -1,14 +1,26 @@
+/* jshint esversion:6 */
+
 'use strict';
 
 const expect = require('chai').expect;
 const request = require('supertest');
 const app = require('../server');
 const knex = require('../knex');
+const bcrypt = require('bcrypt-as-promised');
 
 
 describe('***THE REDDIT CLONE***', () => {
 
+<<<<<<< 7f923bb3810004063e1ca8ae629d033baaa6537b
   describe('GET /logout', () => {
+=======
+    //delete all data added during previous round of testing
+    beforeEach( ()=> {
+        return knex('users').where('id', '>', 3).del();
+    });
+
+    describe('GET /logout', () => {
+>>>>>>> add admin status to session
 
     it('should redirect to the base URL', (done) => {
       request(app)
@@ -24,8 +36,11 @@ describe('***THE REDDIT CLONE***', () => {
               done();
             });
     });
+<<<<<<< 7f923bb3810004063e1ca8ae629d033baaa6537b
   });
 });
+=======
+>>>>>>> add admin status to session
 
 xdescribe('POSTS', function () {
  it('should show all of the posts', function (done) {
@@ -40,6 +55,7 @@ xdescribe('POSTS', function () {
                   expect(res.text).to.include(posts[1].title);
                   expect(res.text).to.include(posts[2].title);
                   done();
+<<<<<<< 7f923bb3810004063e1ca8ae629d033baaa6537b
                 });
               });
   });
@@ -69,4 +85,31 @@ xdescribe('POSTS', function () {
               });
 
   });
+=======
+              });
+          });
+ });
+});
+
+describe('POST /admin/:user_id', () => {
+
+    it('should make a user an admin', (done) => {
+        request(app)
+        .post('/admin/1')
+        .expect(200)
+        .end((err, res) => {
+            if(err) {
+                done(err);
+            }
+            knex('users').where({
+                id : 1
+            })
+            .first().then((user) => {
+                expect(user.admin).to.equal(true);
+                done();
+            });
+        });
+    });
+});
+>>>>>>> add admin status to session
 });

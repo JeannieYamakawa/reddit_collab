@@ -1,3 +1,5 @@
+/* jshint esversion:6 */
+
 'use strict';
 
 const express = require('express');
@@ -29,7 +31,7 @@ app.use(methodOverride('_method'));
 //use as second argument whenever a user needs to be authenticated and logged in to view
 
 const checkAuth = function(req, res, next) {
-  if (!req.session.user) {
+  if (!req.session.username) {
     return res.sendStatus(401);
   }
   next();
@@ -53,7 +55,11 @@ app.use('/', (req, res, next) => {
 const port = process.env.PORT || 3000;
 // Server Listener
 app.listen(port, function() {
+<<<<<<< 7f923bb3810004063e1ca8ae629d033baaa6537b
   console.log(process.env.NODE_ENV, 'listening on port: ' + port);
+=======
+    console.log(process.env.NODE_ENV ,'listening on port: ' + port);
+>>>>>>> add admin status to session
 });
 
 module.exports = app;
