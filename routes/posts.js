@@ -14,15 +14,18 @@ function authorizedUser(req, res, next) {
   }
 }
 
-router.get('/', (req, res, next) => {
+//show all posts
+router.get('/posts', (req, res, next) => {
   knex('users').innerJoin('posts', 'users.id', 'posts.user_id').then((posts) => {
+    console.log(posts);
     res.render('posts', {
       posts: posts
     })
   })
 })
 
-router.get('/:id', (req, res, next) => {
+//
+router.get('/users/:user_id/posts/:post_id', (req, res, next) => {
   let postID = req.params.id;
   knex('posts').where('posts.id', postID).innerJoin('comments', 'posts.id',
     'comments.post_id').then((post) => {
@@ -32,7 +35,7 @@ router.get('/:id', (req, res, next) => {
   })
 })
 
-router.get('/:id/edit', (req, res, next) => {
+router.get('/users/:user_id/posts/:post_id/edit', (req, res, next) => {
   let postID = req.params.id;
   knex('posts').where('id', postID).first().then((post) => {
     res.render('edit-post', {
@@ -41,7 +44,7 @@ router.get('/:id/edit', (req, res, next) => {
   })
 })
 
-router.post('/', authorizedUser, (req, res, next) => {
+router.post('/users/:user_id/posts', authorizedUser, (req, res, next) => {
   knex('posts').insert({
     title: req.body.title,
     body: req.body.body,
@@ -51,7 +54,7 @@ router.post('/', authorizedUser, (req, res, next) => {
   })
 })
 
-router.post('/:id', authorizedUser, (req, res, next)=>{
+router.post('/users/:user_id/posts/:post_id/comments', authorizedUser, (req, res, next)=>{
   let postID = req.params.id;
   knex('comments').insert({
     content: req.body.content,
