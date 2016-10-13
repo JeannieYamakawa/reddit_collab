@@ -21,13 +21,10 @@ function authorizedUser(req, res, next) {
   }
 }
 
-<<<<<<< HEAD
-=======
 //show all posts
 router.get('/posts', (req, res, next) => {
   res.redirect('/');
 });
->>>>>>> taylor
 
 //show a single post page
 router.get('/posts/:post_id', (req, res, next) => {
@@ -45,11 +42,7 @@ router.get('/posts/:post_id', (req, res, next) => {
 })
 
 //show edit page for a post
-<<<<<<< HEAD
-router.get('/posts/:post_id/edit', (req, res, next) => {
-=======
 router.get('/users/:user_id/posts/:post_id/edit', authorizedUser, (req, res, next) => {
->>>>>>> taylor
   let postID = req.params.post_id;
   knex('users').where('posts.id', postID).innerJoin('posts', 'users.id', 'posts.user_id').first().then((post) => {
     res.render('edit-post', {
@@ -96,11 +89,7 @@ router.patch('/posts/:post_id/', (req, res, next) => {
 
 
 //delete a post
-<<<<<<< HEAD
-router.delete('/posts/:post_id/', (req, res, next) => {
-=======
 router.delete('/users/:user_id/posts/:post_id/', authorizedUser, (req, res, next) => {
->>>>>>> taylor
   let postID = req.params.post_id;
   let userID = req.params.user_id;
   knex('posts').where('posts.id', postID).del().then(() =>{
