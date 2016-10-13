@@ -23,9 +23,7 @@ router.get('/login', (req,res)=>{
 
 
 router.get('/signup', (req,res)=>{
-    res.render('pages/signup', {
-      signupMessage : '',
-  });
+    res.render('pages/signup');
 });
 
 
@@ -49,7 +47,7 @@ router.post('/signup', (req, res, next) => {
           res.locals.email=row[0].email;
           res.locals.isAdmin=row[0].admin;
 
-
+          req.session.user = row[0];
           req.session.loggedIn=true;
           req.session.userId=row[0].id;
           req.session.username=row[0].username;
