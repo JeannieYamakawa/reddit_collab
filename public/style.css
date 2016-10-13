@@ -34,7 +34,7 @@ body {
 .loginSignupButtons a {
     margin-top: 1em;
     padding: 1em;
-    border: 1px solid #000;
+    /*border: 1px solid #000;*/
     cursor: pointer;
     display: inline-flex;
     float: right;
@@ -48,9 +48,12 @@ body {
     border-color: #fff;
 }
 
+.loginSignupButtons a:first-child {
+  border-left: 1px solid #fff;
+}
+
 .loginSignupButtons a:hover {
     color: #FA6900;
-    border: 1px solid #FA6900;
 }
 
 
