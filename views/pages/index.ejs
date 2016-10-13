@@ -48,12 +48,8 @@
             <fieldset>
                 <form action="/users/<%=session.user.id%>/posts" method="post">
                     <input type="text" name="title" placeholder="Title">
-                    <input type="text" name="content" placeholder="Content">
-                    <input type="button" value="submit changes">
-                </form>
-                <form action="index.html" method="post">
-                    <input type="hidden" name="post_id" value="<%= post.id %>">
-                    <input type="button" value="delete post">
+                    <input type="text" name="body" placeholder="Content">
+                    <input type="submit" value="Create New Post">
                 </form>
             </fieldset>
         </div>
