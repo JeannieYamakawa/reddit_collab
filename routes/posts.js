@@ -18,7 +18,6 @@ function authorizedUser(req, res, next) {
 router.get('/posts', (req, res, next) => {
   let session = req.session;
   knex('users').innerJoin('posts', 'users.id', 'posts.user_id').then((posts) => {
-    console.log(posts);
     res.render('posts', {
       posts: posts,
       session: session,
@@ -26,9 +25,9 @@ router.get('/posts', (req, res, next) => {
   })
 })
 
-//
+//show a single post page
 router.get('/users/:user_id/posts/:post_id', (req, res, next) => {
-  let postID = req.params.id;
+  let postID = req.params.post_id;
   knex('posts').where('posts.id', postID).innerJoin('comments', 'posts.id',
     'comments.post_id').then((post) => {
     res.render('single-post', {
@@ -37,8 +36,9 @@ router.get('/users/:user_id/posts/:post_id', (req, res, next) => {
   })
 })
 
+//show edit page for a post
 router.get('/users/:user_id/posts/:post_id/edit', (req, res, next) => {
-  let postID = req.params.id;
+  let postID = req.params.post_id;
   knex('posts').where('id', postID).first().then((post) => {
     res.render('edit-post', {
       post: post
@@ -46,6 +46,7 @@ router.get('/users/:user_id/posts/:post_id/edit', (req, res, next) => {
   })
 })
 
+//create a new post
 router.post('/users/:user_id/posts', authorizedUser, (req, res, next) => {
   knex('posts').insert({
     title: req.body.title,
@@ -56,8 +57,9 @@ router.post('/users/:user_id/posts', authorizedUser, (req, res, next) => {
   })
 })
 
+//add a comment to a post
 router.post('/users/:user_id/posts/:post_id/comments', authorizedUser, (req, res, next)=>{
-  let postID = req.params.id;
+  let postID = req.params.post_id;
   knex('comments').insert({
     content: req.body.content,
     user_id: req.session.user.id,
