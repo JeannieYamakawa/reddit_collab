@@ -21,14 +21,14 @@
 
       <h1>Edit Post</h1>
 
-      <form action="users" method="post">
+      <form action="/users/<%= post.user_id %>/posts/<%= post.id %>?_method=PATCH" method="post">
         <input type="text" name="title" value="<%= post.title %>">
-        <input type="text" name="content" value="<%= post.body %>">
-        <input type="button" value="submit changes">
+        <input type="text" name="body" value="<%= post.body %>">
+        <input type="submit" value="submit changes">
       </form>
-      <form action="index.html" method="post">
+      <form action="/users/<%= post.user_id %>/posts/<%= post.id %>?_method=DELETE" method="post">
         <input type="hidden" name="post_id" value="<%= post.id %>">
-        <input type="button" value="delete post">
+        <input type="submit" value="delete post">
       </form>
 
     </body>

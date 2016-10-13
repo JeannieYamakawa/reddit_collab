@@ -34,8 +34,7 @@ router.get('/users/:user_id/posts/:post_id', (req, res, next) => {
 //show edit page for a post
 router.get('/users/:user_id/posts/:post_id/edit', (req, res, next) => {
   let postID = req.params.post_id;
-  knex('posts').where('id', postID).innerJoin('users', 'posts.user_id', 'users.id').then((post) => {
-    console.log(post);
+  knex('posts').where('posts.id', postID).innerJoin('users', 'posts.user_id', 'users.id').first().then((post) => {
     res.render('edit-post', {
       post: post
     })
@@ -70,8 +69,8 @@ router.post('/users/:user_id/posts/:post_id/comments', authorizedUser, (req, res
 router.patch('/users/:user_id/posts/:post_id/', (req, res, next) => {
   let postID = req.params.post_id;
   let userID = req.params.user_id;
-  knex('posts').where('post.id', postID).update({
-    content: req.body.content,
+  knex('posts').where('posts.id', postID).update({
+    body: req.body.body,
     title: req.body.title
   }).then(() =>{
     res.redirect('/users/' + userID + '/posts/' + postID);
@@ -80,6 +79,14 @@ router.patch('/users/:user_id/posts/:post_id/', (req, res, next) => {
 
 
 //delete a post
+router.delete('/users/:user_id/posts/:post_id/', (req, res, next) => {
+  let postID = req.params.post_id;
+  let userID = req.params.user_id;
+  knex('posts').where('posts.id', postID).del().then(() =>{
+    res.redirect('/users/' + userID);
+  })
+});
+
 
 
 module.exports = router;
