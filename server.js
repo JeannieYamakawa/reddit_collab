@@ -39,7 +39,7 @@ const checkAuth = function(req, res, next) {
 
 // Shows all the posts from all users
 app.get('/', (req, res, next) => {
-    knex('users').fullOuterJoin('posts', 'users.id', 'posts.user_id')
+    knex('users').innerJoin('posts', 'users.id', 'posts.user_id')
         .then((posts) => {
             console.log(posts);
             res.render('pages/index', {
