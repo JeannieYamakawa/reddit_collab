@@ -19,23 +19,31 @@ const ejs = require('ejs');
 app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({
-  extended: false
+    extended: false
 }));
 // app.use(bodyParser.json());
 app.use(cookieSession({
-  name: 'session',
-  keys : ['key1', 'key2'],
+    name: 'session',
+    keys: ['key1', 'key2'],
 }));
 app.use(methodOverride('_method'));
 
 //use as second argument whenever a user needs to be authenticated and logged in to view
 
 const checkAuth = function(req, res, next) {
-  if (!req.session) {
-    return res.redirect('/');
-  }
-  next();
+    if (Number.parseInt(req.session.user.id) !== Number.parseInt(req.params.user)) {
+        return res.send("YOU AIN'T SUPPOSED TO BE HERE")
+    }
+    next();
 };
+
+// Shows all the posts from all users
+app.get('/', (req, res, next) => {
+    knex('users').rightJoin('posts', 'users.id', 'posts.user_id')
+    .then((posts) => {
+      res.render('pages/index', {posts: posts});
+    })
+});
 
 // Declare routes variables
 const users = require('./routes/users');
@@ -43,11 +51,11 @@ const auth = require('./routes/auth');
 const posts = require('./routes/posts');
 const comments = require('./routes/comments');
 
-app.use((req,res,next)=>{
-  console.log('req.session',req.session.username);
-  res.locals.currentUser = req.session.currentUser || null ;
-  res.locals.loggedIn = req.session.loggedIn || false;
-  next();
+app.use((req, res, next) => {
+    console.log('req.session', req.session.username);
+    res.locals.currentUser = req.session.currentUser || null;
+    res.locals.loggedIn = req.session.loggedIn || false;
+    next();
 });
 
 // Assign Routes to Server
@@ -55,15 +63,11 @@ app.use(auth);
 app.use(users);
 app.use(posts);
 app.use(comments);
-app.use('/', (req, res, next) => {
-  res.render('pages/index');
-
-});
 
 const port = process.env.PORT || 3000;
 // Server Listener
 app.listen(port, function() {
-  console.log(process.env.NODE_ENV, 'listening on port: ' + port);
+    console.log(process.env.NODE_ENV, 'listening on port: ' + port);
 });
 
 module.exports = app;
