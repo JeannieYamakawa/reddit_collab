@@ -27,6 +27,16 @@ const knex = require('../knex');
 //   });
 // });
 
+//serve up all the comments as JSON for rendering nested comments on single post view
+// router.get('/comments', function(req,res){
+//   let postID = req.params.post_id;
+//   knex('comments').where('comments.post_id', postID).innerJoin('users', 'comments.user_id', 'users.id').then((comments) =>{
+//     knex('comment_parent').where('')
+//     console.log("comments", comments);
+//     res.send()
+//   })
+// });
+
 router.get('/comments/:comments_id', function(req, res) {
   res.redirect('/posts');
 });
