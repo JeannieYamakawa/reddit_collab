@@ -28,23 +28,17 @@ router.get('/users/:user_id', (req, res) => {
     knex('users').where('id',userId).then(function(data){
         userName = data[0].username;
         console.log(userName, "this is the userName");
-    })
-    .then(
-    knex('posts').where('user_id', userId)
-        .then(function(data1){
-            thisUsersPosts = data1;
-        console.log(data1, "these are the specific user's posts");
-    })
-    )
-    .then(
-        knex('comments').where('user_id', userId)
-        .then(function(data2){
+        knex('posts').where('user_id', userId).then(function(data1){
+          thisUsersPosts = data1;
+          console.log(data1, "these are the specific user's posts");
+          knex('comments').where('user_id', userId).then(function(data2){
             thisUsersComments = data2;
             console.log(data2, "these are the specific user's comments");
-      res.render('./user-posts', {thisUsersPosts: thisUsersPosts, thisUsersComments:thisUsersComments, userName: userName, session: session})
-  })
-);
-})
+            res.render('./user-posts', {thisUsersPosts: thisUsersPosts, thisUsersComments:thisUsersComments, userName: userName, session: session})
+          });
+        });
+    });
+});
 
 
 
