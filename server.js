@@ -54,7 +54,7 @@ const users = require('./routes/users');
 const auth = require('./routes/auth');
 const posts = require('./routes/posts');
 const comments = require('./routes/comments');
-const comments = require('./routes/votes');
+const votes = require('./routes/votes');
 
 app.use((req, res, next) => {
     console.log('req.session', req.session.username);
