@@ -15,9 +15,11 @@ function authorizedUser(req, res, next) {
 }
 
 router.get('/', (req, res, next) => {
+  let session = req.session;
   knex('users').innerJoin('posts', 'users.id', 'posts.user_id').then((posts) => {
     res.render('posts', {
-      posts: posts
+      posts: posts,
+      session: session,
     })
   })
 })
