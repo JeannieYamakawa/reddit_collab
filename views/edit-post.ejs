@@ -26,6 +26,7 @@
         <input type="text" name="body" value="<%= post.body %>">
         <input type="submit" value="submit changes">
       </form>
+      
       <form action="/users/<%= post.user_id %>/posts/<%= post.id %>?_method=DELETE" method="post">
         <input type="hidden" name="post_id" value="<%= post.id %>">
         <input type="submit" value="delete post">
