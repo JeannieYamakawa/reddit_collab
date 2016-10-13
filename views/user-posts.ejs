@@ -18,9 +18,77 @@
     </head>
 
     <body>
-        <% for (var i = 0; i < 3; i ++) { %>
-            <h1>All of the posts submitted by you</h1>
-            <% } %>
+      <div class="ui secondary pointing menu">
+        <a href="/posts" class="item">
+          Home
+        </a>
+        <a href="/users/<%=session.user.id%>" class="item active">
+          Your Page
+        </a>
+        <div class="right menu">
+          <% if (session.user) { %>
+            <a href="/logout" class="ui item">
+              Logout
+            </a>
+          <% } else { %>
+            <a href="/login" class="item">
+              Login
+            </a>
+            <a href="/signup" class="item">
+              Sign up
+            </a>
+          <% } %>
+        </div>
+      </div>
+
+        <button><a href="/users/<%=thisUsersPosts.id%>/edit" class = 'btn btn-info'>Edit Your User Info</a></button>
+
+              <h1>Welcome, <%=userName%>!</h1>
+
+
+              <div class = 'col-xs-6'>
+                  <h1>here are your posts.</h1>
+
+                  <%thisUsersPosts.forEach(function(post){ %>
+                          <h3>        <a href="/posts/<%=post.id%>"> <%= post.title %></a>          </h3>
+                          <h3> <a href= "http://<%=post.content_link%>" >  <%= post.content_link %>  </a> </h3>
+                          <br>
+                          <span>
+                          <form method="POST" action="/posts/<%=post.id%>?_method=DELETE" >
+                                <button type="submit" class = 'btn btn-info'>Delete post</button>
+                          </form>
+                          <form method="GET" action="/posts/<%=post.id%>/edit" >
+                                <button class="btn btn-info" type="submit">Edit post</button>
+                          </form>
+                          <form method="GET" action="/posts/<%=post.id%>" >
+                                <button class="btn btn-info" type="submit">Comment on this post</button>
+                          </form>
+                          <hr>
+                      <% }) %>
+                      </div>
+
+                      <div class = 'col-xs-6'>
+                      <h1>here are your comments.</h1>
+
+                      <%thisUsersComments.forEach(function(comment){ %>
+
+                          <h3>        <%= comment.content %>    </h3>
+                          <hr>
+                      <% }) %>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
     </body>
 
 </html>

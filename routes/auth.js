@@ -17,15 +17,13 @@ router.get('/signup', (req,res)=>{
 });
 
 router.get('/login', (req,res)=>{
-  res.render('login');
+  res.render('pages/login');
 
 });
 
 
 router.get('/signup', (req,res)=>{
-    res.render('pages/signup', {
-      signupMessage : '',
-  });
+    res.render('pages/signup');
 });
 
 
@@ -49,7 +47,7 @@ router.post('/signup', (req, res, next) => {
           res.locals.email=row[0].email;
           res.locals.isAdmin=row[0].admin;
 
-
+          req.session.user = row[0];
           req.session.loggedIn=true;
           req.session.userId=row[0].id;
           req.session.username=row[0].username;
@@ -101,7 +99,7 @@ router.post('/login', (req, res, next) => {
 router.get('/logout', (req, res) => {
     req.session = null;
     //redirect to the landing page
-    res.redirect('/');
+    res.redirect('/posts');
 });
 
 module.exports = router;
