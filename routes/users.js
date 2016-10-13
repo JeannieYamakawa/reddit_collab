@@ -12,7 +12,8 @@ router.get('/:user_id/posts', (req,res)=>{
 
 });
 router.get('/signup', (req,res)=>{
-  res.render('signup');
+  res.render('pages/signup', {
+  });
 });
 
 router.get('/login', (req,res)=>{
