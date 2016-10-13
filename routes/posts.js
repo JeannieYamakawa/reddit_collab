@@ -17,10 +17,11 @@ function authorizedUser(req, res, next) {
 
 
 //show a single post page
-router.get('/posts/:post_id', (req, res, next) => {
+router.get('/:post_id', (req, res, next) => {
   let postID = req.params.post_id;
-  knex('users').where('posts.id', postID).innerJoin('posts', 'users.id', 'posts.user_id').first().then((post) => {
-    knex('comments').where('post_id', postID).innerJoin('users', 'comments.user_id', 'users.id').then((comments) =>{
+  let userID = req.params.user_id;
+  knex('users').where('users.id', userID).innerJoin('posts', 'users.id', 'posts.user_id').first().then((post) => {
+    knex('comments').where('comments.post_id', postID).innerJoin('users', 'comments.user_id', 'users.id').then((comments) =>{
       console.log("post", post);
       console.log("comments", comments);
       res.render('single-post', {
@@ -32,9 +33,10 @@ router.get('/posts/:post_id', (req, res, next) => {
 })
 
 //show edit page for a post
-router.get('/posts/:post_id/edit', (req, res, next) => {
+router.get('/:post_id/edit', (req, res, next) => {
   let postID = req.params.post_id;
-  knex('users').where('posts.id', postID).innerJoin('posts', 'users.id', 'posts.user_id').first().then((post) => {
+  let userID = req.params.user_id;
+  knex('users').where('users.id', userID).innerJoin('posts', 'users.id', 'posts.user_id').first().then((post) => {
     res.render('edit-post', {
       post: post
     })
@@ -42,7 +44,7 @@ router.get('/posts/:post_id/edit', (req, res, next) => {
 })
 
 //create a new post
-router.post('/posts', authorizedUser, (req, res, next) => {
+router.post('/', authorizedUser, (req, res, next) => {
   knex('posts').insert({
     title: req.body.title,
     body: req.body.body,
@@ -53,7 +55,7 @@ router.post('/posts', authorizedUser, (req, res, next) => {
 })
 
 //add a comment to a post
-router.post('/posts/:post_id/comments', authorizedUser, (req, res, next)=>{
+router.post('/:post_id/comments', authorizedUser, (req, res, next)=>{
   let postID = req.params.post_id;
   knex('comments').insert({
     content: req.body.content,
@@ -66,7 +68,7 @@ router.post('/posts/:post_id/comments', authorizedUser, (req, res, next)=>{
 
 
 //edit a posts
-router.patch('/posts/:post_id/', (req, res, next) => {
+router.patch('/:post_id/', (req, res, next) => {
   let postID = req.params.post_id;
   let userID = req.params.user_id;
   knex('posts').where('posts.id', postID).update({
@@ -79,7 +81,7 @@ router.patch('/posts/:post_id/', (req, res, next) => {
 
 
 //delete a post
-router.delete('/posts/:post_id/', (req, res, next) => {
+router.delete(':post_id/', (req, res, next) => {
   let postID = req.params.post_id;
   let userID = req.params.user_id;
   knex('posts').where('posts.id', postID).del().then(() =>{
