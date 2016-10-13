@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <!-- jquery -->
+        <script src="http://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+        <!-- semantic ui js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.js" charset="utf-8"></script>
+        <!-- semantic ui css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.css">
+        <!-- my js -->
+        <script src="/app.js" charset="utf-8"></script>
+        <!-- my css -->
+        <link rel="stylesheet" href="/style.css">
+
+        <meta charset="utf-8">
+        <title>Edit your user information.</title>
+    </head>
+
+    <body>
+                <form method="POST" action="/users/<%=wholeUser.userId%>?_method=PATCH%>">
+                    <input type="text" style = 'display: none' value = '<%=wholeUser.userId%>' name = 'id'>
+                <label for="post_title">Username: </label>
+                <input id = 'post_title' type="text" value = '<%= wholeUser.username %>' name = 'username'>
+                <label for="post_title">Email: </label>
+                <input id = 'post_title' type="text" value = '<%= wholeUser.email %>' name = 'email'>
+
+                <label for="content_link">Password: </label>
+                <input id = 'content_link'type="password" value = '<%= userCurrentPassword %>' name = 'password' >
+                <p>
+                </p>
+                <p>
+                </p>
+                    <input id = 'button' class = 'btn btn-info' type="submit" value = 'submit changes to post'>
+                </form>
+
+
+        <br>
+
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+
+</html>
