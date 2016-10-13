@@ -19,15 +19,15 @@
 
     <body>
         <h1>Change your user information!</h1>
-                <form method="POST" action="/users/<%=wholeUser.userId%>?_method=PATCH%>">
-                    <input type="text" style = 'display: none' value = '<%=wholeUser.userId%>' name = 'id'>
-                <label for="post_title">Username: </label>
-                <input id = 'post_title' type="text" value = '<%= wholeUser.username %>' name = 'username'>
-                <label for="post_title">Email: </label>
-                <input id = 'post_title' type="text" value = '<%= wholeUser.email %>' name = 'email'>
+                <form method="POST" action="/users/<%=wholeUser.id%>?_method=PATCH%>">
+                    <input type="text" style = 'display: none' value = '<%=wholeUser.id%>' name = 'id'>
+                <label for="username">Username: </label>
+                <input id = 'username' type="text" value = '<%= wholeUser.username %>' name = 'username'>
+                <label for="email">Email: </label>
+                <input id = 'email' type="text" value = '<%= wholeUser.email %>' name = 'email'>
 
-                <label for="content_link">Password: </label>
-                <input id = 'content_link'type="password" value = '' name = 'password' >
+                <label for="password">Password: </label>
+                <input id = 'password' type="password" value = '' name = 'password' >
                 <p>
                 </p>
                 <p>
