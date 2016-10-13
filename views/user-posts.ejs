@@ -22,9 +22,11 @@
         <a href="/posts" class="item">
           Home
         </a>
-        <a href="/users/<%=session.user.id%>" class="item active">
-          Your Page
-        </a>
+        <% if (session.user) { %>
+          <a href="/users/<%=session.user.id%>" class="item active">
+            Your Page
+          </a>
+        <% } %>
         <div class="right menu">
           <% if (session.user) { %>
             <a href="/logout" class="ui item">
