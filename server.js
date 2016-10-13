@@ -55,7 +55,7 @@ app.use(auth);
 app.use(users);
 app.use(posts);
 app.use(comments);
-app.get('/', (req, res, next) => {
+app.use('/', (req, res, next) => {
   res.render('pages/index');
 
 });
