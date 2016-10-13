@@ -27,14 +27,14 @@
         </a>
         <div class="right menu">
           <% if (session.user) { %>
-            <a class="ui item">
+            <a href="/logout" class="ui item">
               Logout
             </a>
           <% } else { %>
-            <a class="item">
+            <a href="/login" class="item">
               Login
             </a>
-            <a class="item">
+            <a href="/signup" class="item">
               Sign up
             </a>
           <% } %>
