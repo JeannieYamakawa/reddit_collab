@@ -17,7 +17,7 @@ router.get('/signup', (req,res)=>{
 });
 
 router.get('/login', (req,res)=>{
-  res.render('login');
+  res.render('pages/login');
 
 });
 
@@ -101,7 +101,7 @@ router.post('/login', (req, res, next) => {
 router.get('/logout', (req, res) => {
     req.session = null;
     //redirect to the landing page
-    res.redirect('/');
+    res.redirect('/posts');
 });
 
 module.exports = router;
