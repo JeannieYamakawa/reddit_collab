@@ -7,17 +7,24 @@ const bcrypt = require('bcrypt-as-promised');
 
 function authorizedUser(req, res, next) {
   let loggedInUser = req.session.user;
-  if (loggedInUser) {
+  let userID = req.params.user_id;
+
+  if (!loggedInUser) {
+    res.send('restricted');
+  }
+
+  if (loggedInUser.id === parseInt(userID)) {
     next();
   } else {
-    res.send('restricted')
+    res.send('restricted');
   }
 }
 
 //show all posts
 router.get('/posts', (req, res, next) => {
   res.redirect('/');
-})
+});
+
 //show a single post page
 router.get('/users/:user_id/posts/:post_id', (req, res, next) => {
   let postID = req.params.post_id;
@@ -34,7 +41,7 @@ router.get('/users/:user_id/posts/:post_id', (req, res, next) => {
 })
 
 //show edit page for a post
-router.get('/users/:user_id/posts/:post_id/edit', (req, res, next) => {
+router.get('/users/:user_id/posts/:post_id/edit', authorizedUser, (req, res, next) => {
   let postID = req.params.post_id;
   knex('users').where('posts.id', postID).innerJoin('posts', 'users.id', 'posts.user_id').first().then((post) => {
     res.render('edit-post', {
@@ -44,7 +51,7 @@ router.get('/users/:user_id/posts/:post_id/edit', (req, res, next) => {
 })
 
 //create a new post
-router.post('/users/:user_id/posts', authorizedUser, (req, res, next) => {
+router.post('/users/:user_id/posts', (req, res, next) => {
   knex('posts').insert({
     title: req.body.title,
     body: req.body.body,
@@ -81,7 +88,7 @@ router.patch('/users/:user_id/posts/:post_id/', (req, res, next) => {
 
 
 //delete a post
-router.delete('/users/:user_id/posts/:post_id/', (req, res, next) => {
+router.delete('/users/:user_id/posts/:post_id/', authorizedUser, (req, res, next) => {
   let postID = req.params.post_id;
   let userID = req.params.user_id;
   knex('posts').where('posts.id', postID).del().then(() =>{
