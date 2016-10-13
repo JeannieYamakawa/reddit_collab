@@ -25,26 +25,21 @@ router.get('/users/:user_id', (req, res) => {
     var thisUsersComments;
     var userName;
     let session = req.session;
+    console.log(session);
     knex('users').where('id',userId).then(function(data){
         userName = data[0].username;
         console.log(userName, "this is the userName");
-    })
-    .then(
-    knex('posts').where('user_id', userId)
-        .then(function(data1){
-            thisUsersPosts = data1;
-        console.log(data1, "these are the specific user's posts");
-    })
-    )
-    .then(
-        knex('comments').where('user_id', userId)
-        .then(function(data2){
+        knex('posts').where('user_id', userId).then(function(data1){
+          thisUsersPosts = data1;
+          console.log(data1, "these are the specific user's posts");
+          knex('comments').where('user_id', userId).then(function(data2){
             thisUsersComments = data2;
             console.log(data2, "these are the specific user's comments");
-      res.render('./user-posts', {thisUsersPosts: thisUsersPosts, thisUsersComments:thisUsersComments, userName: userName, session: session})
-  })
-);
-})
+            res.render('./user-posts', {thisUsersPosts: thisUsersPosts, thisUsersComments:thisUsersComments, userName: userName, session: session})
+          });
+        });
+    });
+});
 
 
 
@@ -68,7 +63,7 @@ router.get('/users/:user_id/edit',function(req,res){
 
 
 // PATCH /users/:user
-// action for edit user info form\
+// action for edit user info form
 // allows users to edit their information. this option found on a user show EJS page.
 router.patch('/users/:user_id', function(req,res){
     var userId = req.params.user_id;
