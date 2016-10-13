@@ -74,8 +74,7 @@ router.get('/login', (req, res, next) => {
 //authenticate and begin tracking session
 router.post('/login', (req, res, next) => {
     knex('users')
-    .where('email', req.body.username)
-    .orWhere('username', req.body.email)
+    .where('username', req.body.username)
     .first()
     .then((user) => {
 
@@ -86,22 +85,16 @@ router.post('/login', (req, res, next) => {
         }
 
         bcrypt.compare(req.body.password, user.password)
-        .then((result) => {
-            if(result) {
-                req.session({
-                    'loggedIn':true,
-                    id : user.id,
-                    username : user.username,
-                    email : user.email,
-                    admin:user.admin,
-                });
-                return res.redirect('/posts');
-            }
-                res.render('/login', {
-                        loginMessage: "invalid login info",
-                    });
-                });
-        });
+          .then(function () {
+            console.log('worked');
+            req.session.user = user;
+            res.cookie('loggedIn', true);
+            res.redirect('/posts');
+          }, function () {
+            console.log('failed');
+            res.redirect('back');
+          });
+    });
 });
 
 //logout
