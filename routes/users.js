@@ -30,6 +30,7 @@ router.get('/users/:user_id', (req, res) => {
     var thisUsersPosts =[];
     var thisUsersComments=[];
     var userName;
+    let session = req.session;
     knex('users').innerJoin('posts', 'users.id', 'posts.user_id').then(function(data){
         for(let i=0; i<data.length; i++){
             if(data[i].user_id == userId){
@@ -44,7 +45,7 @@ router.get('/users/:user_id', (req, res) => {
                 thisUsersComments.push(data2[j])
             }
         }
-      res.render('./user-posts', {thisUsersPosts: thisUsersPosts, thisUsersComments:thisUsersComments, userName: userName})
+      res.render('./user-posts', {thisUsersPosts: thisUsersPosts, thisUsersComments:thisUsersComments, userName: userName, session: session})
   })
 )
 });
