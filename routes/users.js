@@ -21,46 +21,42 @@ router.get('/users', (req, res, next) => {
 //displays all posts by a specific user
 router.get('/users/:user_id', (req, res) => {
     var userId = req.params.user_id;
-    var thisUsersPosts =[];
-    var thisUsersComments=[];
+    var thisUsersPosts;
+    var thisUsersComments;
     var userName;
     let session = req.session;
-    knex('users').innerJoin('posts', 'users.id', 'posts.user_id').then(function(data){
-        for(let i=0; i<data.length; i++){
-            if(data[i].user_id == userId){
-                thisUsersPosts.push(data[i])
-            }
-        }
-        userName =  thisUsersPosts[0].username;
+    knex('users').where('id',userId).then(function(data){
+        userName = data[0].username;
+        console.log(userName, "this is the userName");
     })
-    .then(knex('users').innerJoin('comments', 'users.id', 'comments.user_id').then(function(data2){
-        for (let j=0; j<data2.length; j++){
-            if(data2[j].user_id == userId){
-                thisUsersComments.push(data2[j])
-            }
-        }
+    .then(
+    knex('posts').where('user_id', userId)
+        .then(function(data1){
+            thisUsersPosts = data1;
+        console.log(data1, "these are the specific user's posts");
+    })
+    )
+    .then(
+        knex('comments').where('user_id', userId)
+        .then(function(data2){
+            thisUsersComments = data2;
+            console.log(data2, "these are the specific user's comments");
       res.render('./user-posts', {thisUsersPosts: thisUsersPosts, thisUsersComments:thisUsersComments, userName: userName, session: session})
   })
-)
-});
+);
+})
 
 
 
 // GET /users/:user/edit
 //page with form for editing user information
 router.get('/users/:user_id/edit',function(req,res){
-    var userRequestingEdit = req.params.user_id;
-    var wholeUser = req.session;
-    //why is my session empty?
-    var userLoggedIn = wholeUser.userId;
-    var userCurrentPassword;
-    console.log(wholeUser);
-    if (userRequestingEdit == userLoggedIn){
-    knex('users').where('id', userLoggedIn)
-        .then(function(data){
-            userCurrentPassword = data.password;
-            res.render('./user-edit', {wholeUser:wholeUser, userCurrentPassword:userCurrentPassword})
-        })
+    var userBeingEdited = req.params.user_id;
+    var wholeUser = req.session.user;
+    console.log(req.session, 'this is the req.session');
+    var userLoggedIn = req.session.user.id;
+    if (userBeingEdited == userLoggedIn){
+        res.render('./user-edit', {wholeUser:wholeUser})
     } else{
     res.sendStatus(401);
     }

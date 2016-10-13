@@ -44,6 +44,7 @@
                 </div>
             </div>
         </header>
+          <% if (session.user) { %>
         <div class="form-container">
             <fieldset>
                 <form action="/users/<%=session.user.id%>/posts" method="post">
@@ -53,6 +54,7 @@
                 </form>
             </fieldset>
         </div>
+        <% } %>
 
         <div class="container">
             <%- include ../partials/posts %>
