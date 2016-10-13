@@ -35,7 +35,6 @@ router.get('/users/:user_id/posts/:post_id', (req, res, next) => {
 router.get('/users/:user_id/posts/:post_id/edit', (req, res, next) => {
   let postID = req.params.post_id;
   knex('posts').where('posts.id', postID).innerJoin('users', 'posts.user_id', 'users.id').first().then((post) => {
-    console.log(post);
     res.render('edit-post', {
       post: post
     })
