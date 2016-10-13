@@ -27,11 +27,11 @@ const knex = require('../knex');
 //   });
 // });
 
-router.get('/:id', function(req, res) {
+router.get('/comments/:comments_id', function(req, res) {
   res.redirect('/posts');
 });
 
-router.get('/:id/edit', function(req, res) {
+router.get('/comments/:comments_id/edit', function(req, res) {
   knex('comments').where({
     id: req.params.id
   }).first().then(function(comment) {
@@ -43,7 +43,7 @@ router.get('/:id/edit', function(req, res) {
   });
 });
 
-router.patch('/:id', function(req, res) {
+router.patch('/comments/:comments_id', function(req, res) {
   knex('comments').where({
     id: req.params.id
   }).update({
@@ -55,7 +55,7 @@ router.patch('/:id', function(req, res) {
   });
 });
 
-router.delete('/:id', function(req, res) {
+router.delete('/comments/:comments_id', function(req, res) {
   knex('comments').where({
     id: req.params.id
   }).del().then(function(comment) {
