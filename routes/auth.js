@@ -57,7 +57,7 @@ router.post('/signup', (req, res, next) => {
 
           console.log('session', req.session);
           console.log('locals', res.locals);
-          res.redirect('/posts');
+          res.redirect('/');
         });
     });
 });
@@ -87,7 +87,7 @@ router.post('/login', (req, res, next) => {
             console.log('worked');
             req.session.user = user;
             res.cookie('loggedIn', true);
-            res.redirect('/posts');
+            res.redirect('/');
           }, function () {
             console.log('failed');
             res.redirect('back');
@@ -99,7 +99,7 @@ router.post('/login', (req, res, next) => {
 router.get('/logout', (req, res) => {
     req.session = null;
     //redirect to the landing page
-    res.redirect('/posts');
+    res.redirect('/');
 });
 
 module.exports = router;

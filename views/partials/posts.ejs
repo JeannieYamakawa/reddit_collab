@@ -8,12 +8,19 @@
         <% posts.forEach(function (post){ %>
           <% if (post.title) { %>
             <div class="postBox">
+              <div class="votes">
+                <button class="upvote" value="<%=post.id%>">&#8593;</button>
+                <p></p>
+                <button class="downvote" value="<%=post.id%>">&#8595;</button>
+              </div>
+              <div class="post-content">
                 <a href="/users/<%= post.user_id%>/posts/<%= post.id %>"><h4 class="postTitle"><%=post.title %></h4></a>
                 <p class="postBody">
-                    <%= post.body %>
+                  <%= post.body %>
                 </p>
-                </p>
-                <a href="/users/<%= post.user_id%>"><h4 class="postTitle"><h6><%= post.username %></h6></a>
+              </p>
+              <a href="/users/<%= post.user_id%>"><h4 class="postTitle"><h6><%= post.username %></h6></a>
+              </div>
             </div>
             <%}%>
             <% }) %>

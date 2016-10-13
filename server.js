@@ -54,6 +54,7 @@ const users = require('./routes/users');
 const auth = require('./routes/auth');
 const posts = require('./routes/posts');
 const comments = require('./routes/comments');
+const votes = require('./routes/votes');
 
 app.use((req, res, next) => {
     console.log('req.session', req.session.username);
@@ -67,6 +68,7 @@ app.use(auth);
 app.use(users);
 app.use('/users/:user_id/posts', posts);
 app.use('/users/:user_id/posts/:post_id', comments);
+app.use(votes);
 
 const port = process.env.PORT || 3000;
 // Server Listener

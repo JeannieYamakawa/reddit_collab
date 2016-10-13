@@ -43,10 +43,6 @@
         </div>
       </div>
         <div class="userWelcome">
-          <div>
-            <button>Up</button>
-            <button>Down</button>
-          </div>
             <h2> Welcome </h2>
             <% posts.forEach(function (user){ %>
                 <h3><%=user.username %></h3>
@@ -57,10 +53,10 @@
 
         <% posts.forEach(function (post){ %>
             <div class="postBox">
-                <h4 class="postTitle"><%=post.title %></h4>
-                <p class="postBody">
-                    <%=post.body %>
-                </p>
+              <h4 class="postTitle"><%=post.title %></h4>
+              <p class="postBody">
+                  <%=post.body %>
+              </p>
             </div>
             <% }) %>
     </body>
