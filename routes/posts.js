@@ -16,15 +16,8 @@ function authorizedUser(req, res, next) {
 
 //show all posts
 router.get('/posts', (req, res, next) => {
-  let session = req.session;
-  knex('users').innerJoin('posts', 'users.id', 'posts.user_id').then((posts) => {
-    res.render('posts', {
-      posts: posts,
-      session: session,
-    })
-  })
+  res.redirect('/');
 })
-
 //show a single post page
 router.get('/users/:user_id/posts/:post_id', (req, res, next) => {
   let postID = req.params.post_id;

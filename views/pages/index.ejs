@@ -18,6 +18,32 @@
     </head>
 
     <body>
+      <header>
+        <div class="ui secondary pointing menu">
+          <a class="item active">
+            Home
+          </a>
+          <% if (session.user) { %>
+            <a href="/users/<%=session.user.id%>" class="item">
+              Your Page
+            </a>
+          <% } %>
+          <div class="right menu">
+            <% if (session.user) { %>
+              <a href="/logout" class="ui item">
+                Logout
+              </a>
+            <% } else { %>
+              <a href="/login" class="item">
+                Login
+              </a>
+              <a href="/signup" class="item">
+                Sign up
+              </a>
+            <% } %>
+          </div>
+        </div>
+      </header>
 
         <div class="container">
           <%- include ../partials/posts %>

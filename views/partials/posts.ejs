@@ -6,6 +6,7 @@
         <p></p>
 
         <% posts.forEach(function (post){ %>
+          <% if (post.title) { %>
             <div class="postBox">
                 <a href="/users/<%= post.user_id%>/posts/<%= post.id %>"><h4 class="postTitle"><%=post.title %></h4></a>
                 <p class="postBody">
@@ -14,4 +15,5 @@
                 </p>
                 <a href="/users/<%= post.user_id%>"><h4 class="postTitle"><h6><%= post.username %></h6></a>
             </div>
+            <%}%>
             <% }) %>
