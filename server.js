@@ -31,7 +31,7 @@ app.use(methodOverride('_method'));
 //use as second argument whenever a user needs to be authenticated and logged in to view
 
 const checkAuth = function(req, res, next) {
-    if (Number.parseInt(req.session.user.id) !== Number.parseInt(req.params.user)) {
+    if (Number.parseInt(req.session.user.id) !== Number.parseInt(req.params.user_id)) {
         return res.send("YOU AIN'T SUPPOSED TO BE HERE")
     }
     next();
@@ -65,8 +65,8 @@ app.use((req, res, next) => {
 // Assign Routes to Server
 app.use(auth);
 app.use(users);
-app.use(posts);
-app.use(comments);
+app.use('/users/:user_id', posts);
+app.use('/users/:user_id/posts/:post_id', comments);
 
 const port = process.env.PORT || 3000;
 // Server Listener
