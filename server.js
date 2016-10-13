@@ -24,28 +24,17 @@ app.use(bodyParser.urlencoded({
 // app.use(bodyParser.json());
 app.use(cookieSession({
   name: 'session',
-<<<<<<< HEAD
-  keys: ['loggedIn', 'username'],
-=======
-  keys: ['loggedIn', 'username', 'admin'],
->>>>>>> c34445670687af8b233d126d703e6254a15d1085
+  keys : ['key1', 'key2'],
 }));
 app.use(methodOverride('_method'));
 
 //use as second argument whenever a user needs to be authenticated and logged in to view
 
 const checkAuth = function(req, res, next) {
-<<<<<<< HEAD
-  if (!req.session.username) {
-    return res.sendStatus(401);
+  if (!req.session) {
+    return res.redirect('/');
   }
   next();
-=======
-    if (!req.session) {
-        return res.redirect('/');
-    }
-    next();
->>>>>>> c34445670687af8b233d126d703e6254a15d1085
 };
 
 // Declare routes variables
@@ -67,7 +56,8 @@ app.use('/users', users);
 app.use('/posts', posts);
 app.use('/comments', comments);
 app.use('/', (req, res, next) => {
-  res.render('./pages/index');
+  res.render('pages/index');
+
 });
 
 const port = process.env.PORT || 3000;

@@ -13,32 +13,47 @@ body {
 
 /*Landing Page*/
 
-.redditWelcome {
+.raddit {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 3em;
+    background-color: #fff;
+}
+
+.raddit h1 {
+  font-size: 4em;
+  text-align: center;
+}
+
+.raddit p {
+  font-size: 2em;
+  text-align: center;
 }
 
 .loginSignupButtons a {
     margin-top: 1em;
     padding: 1em;
-    border: 1px solid #000;
+    /*border: 1px solid #000;*/
     cursor: pointer;
     display: inline-flex;
     float: right;
     text-decoration: none;
     color: black;
     font-size: 1.15em;
-    width: 4em;
+    width: 15%;
     justify-content: center;
     align-items: center;
+    color: #fff;
+    border-color: #fff;
+}
+
+.loginSignupButtons a:first-child {
+  border-left: 1px solid #fff;
 }
 
 .loginSignupButtons a:hover {
     color: #FA6900;
-    border: 1px solid #FA6900;
 }
 
 

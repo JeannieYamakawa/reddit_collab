@@ -1,13 +1,13 @@
 <div class="nav-bar">
     <% if (username) { %>
-    <a href="/logout">
+    <a href="/auth/logout">
         <button class="nav-button">log out</button>
     </a>
     <% } else { %>
-        <a href="/login">
+        <a href="/auth/login">
             <button class="nav-button">log in</button>
         </a>
-        <a href="/signup">
+        <a href="/auth/signup">
             <button class="nav-button">sign up</button>
         </a>
     <% } %>

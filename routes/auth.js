@@ -7,12 +7,17 @@ const express = require('express');
 const router = express.Router();
 const knex = require('../knex');
 const bcrypt = require('bcrypt-as-promised');
-const methodOverride = require('method-override');
+const users_app = require('../modules/users_app');
 
+
+router.get('/signup', (req,res)=>{
+    res.render('pages/signup', {
+      signupMessage : '',
+  });
+});
 
 //GET login page
 router.get('/login', (req, res, next) => {
-    console.log(req.session);
         res.render('pages/login', {
             loginMessage : "",
         });
@@ -21,8 +26,8 @@ router.get('/login', (req, res, next) => {
 //authenticate and begin tracking session
 router.post('/login', (req, res, next) => {
     knex('users')
-    .where('email', req.body.credential)
-    .orWhere('username', req.body.credential)
+    .where('email', req.body.username)
+    .orWhere('username', req.body.email)
     .first()
     .then((user) => {
 
@@ -32,13 +37,15 @@ router.post('/login', (req, res, next) => {
             });
         }
 
-        bcrypt.compare(req.body.credential, user.password)
+        bcrypt.compare(req.body.password, user.password)
         .then((result) => {
             if(result) {
                 req.session({
                     'loggedIn':true,
+                    id : user.id,
                     username : user.username,
-                    admin:user.admin
+                    email : user.email,
+                    admin:user.admin,
                 });
                 return res.redirect('/posts');
             }

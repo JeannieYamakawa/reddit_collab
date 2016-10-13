@@ -12,7 +12,8 @@ router.get('/:user_id/posts', (req,res)=>{
 
 });
 router.get('/signup', (req,res)=>{
-  res.render('signup');
+  res.render('pages/signup', {
+  });
 });
 
 router.get('/login', (req,res)=>{
@@ -38,7 +39,7 @@ router.get('/', (req, res, next) => {
 });
 
 
-router.post('/login', (req, res, next) => {
+router.post('/signup', (req, res, next) => {
   let newUser = {
     username: req.body.username,
     email: req.body.email
