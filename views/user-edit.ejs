@@ -18,6 +18,7 @@
     </head>
 
     <body>
+        <h1>Change your user information!</h1>
                 <form method="POST" action="/users/<%=wholeUser.userId%>?_method=PATCH%>">
                     <input type="text" style = 'display: none' value = '<%=wholeUser.userId%>' name = 'id'>
                 <label for="post_title">Username: </label>
@@ -26,12 +27,12 @@
                 <input id = 'post_title' type="text" value = '<%= wholeUser.email %>' name = 'email'>
 
                 <label for="content_link">Password: </label>
-                <input id = 'content_link'type="password" value = '<%= userCurrentPassword %>' name = 'password' >
+                <input id = 'content_link'type="password" value = '' name = 'password' >
                 <p>
                 </p>
                 <p>
                 </p>
-                    <input id = 'button' class = 'btn btn-info' type="submit" value = 'submit changes to post'>
+                    <input id = 'button' class = 'btn btn-info' type="submit" value = 'submit changes'>
                 </form>
 
 
