@@ -18,9 +18,27 @@
     </head>
 
     <body>
-        <% for (var i = 0; i < 3; i ++) { %>
-            <h1>Single Post - will have comment box and thread underneath</h1>
-            <% } %>
+
+      <h1> <%= post.title %> </h1>
+      <h3> <%= post.body %> </h3>
+      <p> <%= post.username %> </p>
+
+      <form action="/users/<%= post.user_id %>/posts/<%= post.id %>/edit" method="get">
+        <input type="submit" name="name" value="edit">
+      </form>
+
+      <hr>
+
+      <ul>
+
+        <% comments.forEach((comment)=>{ %>
+          <li>
+            <p> <%= comment.content %> --- <%= comment.username %> </p>
+            <% }) %>
+          </li>
+      </ul>
+
+
     </body>
 
 </html>

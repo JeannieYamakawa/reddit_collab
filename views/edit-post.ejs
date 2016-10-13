@@ -18,9 +18,19 @@
     </head>
 
     <body>
-        <% for (var i = 0; i < 3; i ++) { %>
-            <h1>Edit Post</h1>
-            <% } %>
+
+      <h1>Edit Post</h1>
+
+      <form action="users" method="post">
+        <input type="text" name="title" value="<%= post.title %>">
+        <input type="text" name="content" value="<%= post.body %>">
+        <input type="button" value="submit changes">
+      </form>
+      <form action="index.html" method="post">
+        <input type="hidden" name="post_id" value="<%= post.id %>">
+        <input type="button" value="delete post">
+      </form>
+
     </body>
 
 </html>

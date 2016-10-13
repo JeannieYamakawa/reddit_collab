@@ -28,10 +28,12 @@ router.get('/posts', (req, res, next) => {
 //show a single post page
 router.get('/users/:user_id/posts/:post_id', (req, res, next) => {
   let postID = req.params.post_id;
-  knex('posts').where('posts.id', postID).innerJoin('comments', 'posts.id',
-    'comments.post_id').then((post) => {
-    res.render('single-post', {
-      post: post
+  knex('posts').where('posts.id', postID).innerJoin('users', 'posts.user_id', 'users.id').first().then((post) => {
+    knex('comments').where('post_id', postID).innerJoin('users', 'comments.user_id', 'users.id').then((comments) =>{
+      res.render('single-post', {
+        post: post,
+        comments: comments
+      })
     })
   })
 })
@@ -39,7 +41,8 @@ router.get('/users/:user_id/posts/:post_id', (req, res, next) => {
 //show edit page for a post
 router.get('/users/:user_id/posts/:post_id/edit', (req, res, next) => {
   let postID = req.params.post_id;
-  knex('posts').where('id', postID).first().then((post) => {
+  knex('posts').where('id', postID).innerJoin('users', 'posts.user_id', 'users.id').then((post) => {
+    console.log(post);
     res.render('edit-post', {
       post: post
     })
@@ -69,6 +72,21 @@ router.post('/users/:user_id/posts/:post_id/comments', authorizedUser, (req, res
   })
 })
 
+
+//edit a posts
+router.patch('/users/:user_id/posts/:post_id/', (req, res, next) => {
+  let postID = req.params.post_id;
+  let userID = req.params.user_id;
+  knex('posts').where('post.id', postID).update({
+    content: req.body.content,
+    title: req.body.title
+  }).then(() =>{
+    res.redirect('/users/' + userID + '/posts/' + postID);
+  })
+});
+
+
+//delete a post
 
 
 module.exports = router;
