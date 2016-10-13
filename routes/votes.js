@@ -8,10 +8,10 @@
 
 router.post('/post/upvote', (req, res, next) => {
   console.log(req.body);
-  knex('votes-posts').insert({
+  knex('votes_posts').insert({
     user_id: req.session.user.id,
-    post_id: req.body.postID
-    upvote: true;
+    post_id: req.body.postID,
+    upvote: true
   }).then(() => {
     next();
   })
@@ -19,10 +19,10 @@ router.post('/post/upvote', (req, res, next) => {
 
 router.post('/post/downvote', (req, res, next) => {
   console.log(req.body);
-  knex('votes-posts').insert({
+  knex('votes_posts').insert({
     user_id: req.session.user.id,
-    post_id: req.body.postID
-    downvote: true;
+    post_id: req.body.postID,
+    downvote: true
   }).then(() => {
     next();
   })
@@ -30,10 +30,10 @@ router.post('/post/downvote', (req, res, next) => {
 
 router.post('/comment/upvote', (req, res, next) => {
   console.log(req.body);
-  knex('votes-comment').insert({
+  knex('votes_comment').insert({
     user_id: req.session.user.id,
-    post_id: req.body.commentID
-    upvote: true;
+    post_id: req.body.commentID,
+    upvote: true
   }).then(() => {
     next();
   })
@@ -41,10 +41,10 @@ router.post('/comment/upvote', (req, res, next) => {
 
 router.post('/comment/downvote', (req, res, next) => {
   console.log(req.body);
-  knex('votes-comment').insert({
+  knex('votes_comments').insert({
     user_id: req.session.user.id,
-    post_id: req.body.commentID
-    downvote: true;
+    post_id: req.body.commentID,
+    downvote: true
   }).then(() => {
     next();
   })
