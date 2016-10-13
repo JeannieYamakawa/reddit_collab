@@ -1,5 +1,5 @@
 exports.up = function(knex, Promise) {
-    return knex.schema.createTableIfNotExists('comments-posts'(table) => {
+    return knex.schema.createTableIfNotExists('comments-posts', (table) => {
         table.increments()
         table.integer('user_id')
             .unsigned()
