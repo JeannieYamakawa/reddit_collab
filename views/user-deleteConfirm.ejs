@@ -14,16 +14,16 @@
         <link rel="stylesheet" href="/style.css">
 
         <meta charset="utf-8">
-        <title>All Posts</title>
+        <title>Your Posts</title>
     </head>
 
     <body>
       <div class="ui secondary pointing menu">
-        <a class="item active">
+        <a href="/posts" class="item">
           Home
         </a>
         <% if (session.user) { %>
-          <a href="/users/<%=session.user.id%>" class="item">
+          <a href="/users/<%=session.user.id%>" class="item active">
             Your Page
           </a>
         <% } %>
@@ -42,27 +42,17 @@
           <% } %>
         </div>
       </div>
-        <div class="userWelcome">
-          <div>
-            <button>Up</button>
-            <button>Down</button>
-          </div>
-            <h2> Welcome </h2>
-            <% posts.forEach(function (user){ %>
-                <h3><%=user.username %></h3>
-                <% }) %>
-        </div>
 
-        <p></p>
+              <h1>Are you sure you want to delete yourself?</h1>
 
-        <% posts.forEach(function (post){ %>
-            <div class="postBox">
-                <h4 class="postTitle"><%=post.title %></h4>
-                <p class="postBody">
-                    <%=post.body %>
-                </p>
-            </div>
-            <% }) %>
+
+             <form action="/users/<%=session.user.id%>?_method=DELETE" method= 'POST'>
+                 <input type="submit" value = 'Confirm'>
+             </form>
+
+
+
+
     </body>
 
 </html>

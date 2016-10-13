@@ -66,7 +66,7 @@ app.use((req, res, next) => {
 // Assign Routes to Server
 app.use(auth);
 app.use(users);
-app.use('/users/:user_id', posts);
+app.use('/users/:user_id/posts', posts);
 app.use('/users/:user_id/posts/:post_id', comments);
 app.use(votes);
 
