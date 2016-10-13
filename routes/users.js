@@ -8,12 +8,6 @@ const users_app = require('../modules/users_app');
 
 
 
-
-
-
-
-
-
 //displays a page of all users
 router.get('/users', (req, res, next) => {
   console.log(req.locals);
