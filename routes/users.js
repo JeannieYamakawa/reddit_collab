@@ -40,6 +40,7 @@ router.get('/', (req, res, next) => {
 
 
 router.post('/signup', (req, res, next) => {
+  console.log(req.body);
   let newUser = {
     username: req.body.username,
     email: req.body.email
@@ -50,12 +51,25 @@ router.post('/signup', (req, res, next) => {
       newUser.password = hash;
       users_app.users.set.new(newUser)
         .then((row) => {
-          res.locals.currentUser = row[0];
-          res.locals.loggedIn = true;
-          req.session.currentUser = row[0];
-          req.session.loggedIn = true;
+          console.log('user_row',row);
 
-          res.redirect('/index');
+          res.locals.loggedIn=true;
+          res.locals.userId=row[0].id;
+          res.locals.username=row[0].username;
+          res.locals.email=row[0].email;
+          res.locals.isAdmin=row[0].admin;
+
+
+          req.session.loggedIn=true;
+          req.session.userId=row[0].id;
+          req.session.username=row[0].username;
+          req.session.email=row[0].email;
+          req.session.isAdmin=row[0].admin;
+
+
+          console.log('session', req.session);
+          console.log('locals', res.locals);
+          res.redirect('/posts');
         });
     });
 });

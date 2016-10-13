@@ -40,6 +40,11 @@ var users_app = {
         }
 
       }
+    },
+    set:{
+      new:function (user) {
+        return knex('users').insert(user).returning(['id','username','email','admin']);
+      }
     }
   }
 };
