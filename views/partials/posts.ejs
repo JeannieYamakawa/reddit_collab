@@ -1,0 +1,17 @@
+
+        <div class="userWelcome">
+            <h2> Welcome </h2>
+        </div>
+
+        <p></p>
+
+        <% posts.forEach(function (post){ %>
+            <div class="postBox">
+                <a href="/users/<%=post.user_id%>/posts/<%=posts.post_id%>"><h4 class="postTitle"><%=post.title %></h4></a>
+                <p class="postBody">
+                    <%= post.body %>
+                </p>
+                </p>
+                <h6><%= post.username %></h6>
+            </div>
+            <% }) %>
