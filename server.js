@@ -51,11 +51,11 @@ app.use((req,res,next)=>{
 });
 
 // Assign Routes to Server
-app.use('/auth', auth);
-app.use('/users', users);
-app.use('/posts', posts);
-app.use('/comments', comments);
-app.use('/', (req, res, next) => {
+app.use(auth);
+app.use(users);
+app.use(posts);
+app.use(comments);
+app.get('/', (req, res, next) => {
   res.render('pages/index');
 
 });
