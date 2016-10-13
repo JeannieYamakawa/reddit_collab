@@ -24,17 +24,28 @@ app.use(bodyParser.urlencoded({
 // app.use(bodyParser.json());
 app.use(cookieSession({
   name: 'session',
+<<<<<<< HEAD
   keys: ['loggedIn', 'username'],
+=======
+  keys: ['loggedIn', 'username', 'admin'],
+>>>>>>> c34445670687af8b233d126d703e6254a15d1085
 }));
 app.use(methodOverride('_method'));
 
 //use as second argument whenever a user needs to be authenticated and logged in to view
 
 const checkAuth = function(req, res, next) {
+<<<<<<< HEAD
   if (!req.session.username) {
     return res.sendStatus(401);
   }
   next();
+=======
+    if (!req.session) {
+        return res.redirect('/');
+    }
+    next();
+>>>>>>> c34445670687af8b233d126d703e6254a15d1085
 };
 
 // Declare routes variables

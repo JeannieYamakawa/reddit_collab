@@ -35,23 +35,18 @@ router.post('/login', (req, res, next) => {
         bcrypt.compare(req.body.credential, user.password)
         .then((result) => {
             if(result) {
-                req.session({'loggedIn':true,
-                admin:user.admin});
+                req.session({
+                    'loggedIn':true,
+                    username : user.username,
+                    admin:user.admin
+                });
                 return res.redirect('/posts');
             }
-
-            bcrypt.compare(req.body.credential, user.password)
-                .then((result) => {
-                    if (result) {
-                        req.session('loggedIn', true);
-                        return res.redirect('/posts');
-                    }
-                    res.render('/login', {
+                res.render('/login', {
                         loginMessage: "invalid login info",
                     });
                 });
         });
-});
 });
 
 //logout

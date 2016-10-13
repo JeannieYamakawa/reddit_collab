@@ -11,9 +11,12 @@ const bcrypt = require('bcrypt-as-promised');
 
 describe('***THE REDDIT CLONE***', () => {
 
+<<<<<<< HEAD
 
   describe('GET /logout', () => {
 
+=======
+>>>>>>> c34445670687af8b233d126d703e6254a15d1085
     //delete all data added during previous round of testing
     beforeEach( ()=> {
       return knex('users').where('id', '>', 3).del();
@@ -54,8 +57,12 @@ describe('***THE REDDIT CLONE***', () => {
                   expect(res.text).to.include(posts[1].title);
                   expect(res.text).to.include(posts[2].title);
                   done();
+<<<<<<< HEAD
 
                 });
+=======
+                              });
+>>>>>>> c34445670687af8b233d126d703e6254a15d1085
               });
     });
     xit('should show a single post with all of the comments', function (done) {
@@ -86,7 +93,12 @@ describe('***THE REDDIT CLONE***', () => {
     });
 
   });
+<<<<<<< HEAD
 });
+=======
+              });
+
+>>>>>>> c34445670687af8b233d126d703e6254a15d1085
 
 describe('POST /admin/:user_id', () => {
 
@@ -106,5 +118,10 @@ describe('POST /admin/:user_id', () => {
               done();
             });
         });
+<<<<<<< HEAD
   });
+=======
+    });
+});
+>>>>>>> c34445670687af8b233d126d703e6254a15d1085
 });
