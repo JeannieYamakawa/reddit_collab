@@ -10,10 +10,58 @@ const bcrypt = require('bcrypt-as-promised');
 const users_app = require('../modules/users_app');
 
 
+//
+router.get('/signup', (req,res)=>{
+  res.render('pages/signup', {
+  });
+});
+
+router.get('/login', (req,res)=>{
+  res.render('login');
+
+});
+
+
 router.get('/signup', (req,res)=>{
     res.render('pages/signup', {
       signupMessage : '',
   });
+});
+
+
+router.post('/signup', (req, res, next) => {
+  console.log(req.body);
+  let newUser = {
+    username: req.body.username,
+    email: req.body.email
+  };
+
+  bcrypt.hash(req.body.password, 10)
+    .then((hash) => {
+      newUser.password = hash;
+      users_app.users.set.new(newUser)
+        .then((row) => {
+          console.log('user_row',row);
+
+          res.locals.loggedIn=true;
+          res.locals.userId=row[0].id;
+          res.locals.username=row[0].username;
+          res.locals.email=row[0].email;
+          res.locals.isAdmin=row[0].admin;
+
+
+          req.session.loggedIn=true;
+          req.session.userId=row[0].id;
+          req.session.username=row[0].username;
+          req.session.email=row[0].email;
+          req.session.isAdmin=row[0].admin;
+
+
+          console.log('session', req.session);
+          console.log('locals', res.locals);
+          res.redirect('/posts');
+        });
+    });
 });
 
 //GET login page
@@ -26,8 +74,7 @@ router.get('/login', (req, res, next) => {
 //authenticate and begin tracking session
 router.post('/login', (req, res, next) => {
     knex('users')
-    .where('email', req.body.username)
-    .orWhere('username', req.body.email)
+    .where('username', req.body.username)
     .first()
     .then((user) => {
 
@@ -38,22 +85,16 @@ router.post('/login', (req, res, next) => {
         }
 
         bcrypt.compare(req.body.password, user.password)
-        .then((result) => {
-            if(result) {
-                req.session({
-                    'loggedIn':true,
-                    id : user.id,
-                    username : user.username,
-                    email : user.email,
-                    admin:user.admin,
-                });
-                return res.redirect('/posts');
-            }
-                res.render('/login', {
-                        loginMessage: "invalid login info",
-                    });
-                });
-        });
+          .then(function () {
+            console.log('worked');
+            req.session.user = user;
+            res.cookie('loggedIn', true);
+            res.redirect('/posts');
+          }, function () {
+            console.log('failed');
+            res.redirect('back');
+          });
+    });
 });
 
 //logout
